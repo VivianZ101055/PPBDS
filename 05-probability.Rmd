@@ -110,7 +110,7 @@ knitr::opts_chunk$set(tidy = FALSE, cache.extra = packageVersion('tufte'))
 <!-- Read Topic 14 in Bayesian Workshop. Lots of interesting ideas and examples there for this first section of the chapter. Any coding examples should be simple, with  no list-columns and map_* functions. Basic tool we are introducing is doing simulation within a tibble. Consider doing some of the sample problems from STAT 110, many of which are hard to do analytically but easy to do with simulation. Mention what a PDF is, but no math. Show histogram of results from one die and two die. Explain how those histograms are, more or less, PDFs. Explain what p(A), p(B) and p(A, B) using dice/coin examples. PDF. Trump's electoral votes as a PDF. -->
 
 
-```{r, echo=FALSE, fig.margin=TRUE}
+```{r, echo=FALSE, fig.margin=TRUE, fig.cap="Dice and Probability."}
 
 knitr::include_graphics("05-probability/images/probability_dice.jpeg")
 
@@ -1117,7 +1117,7 @@ x %>%
 
 ### Unknown Unknowns
 
-```{r, echo=FALSE, fig.margin=TRUE}
+```{r, echo=FALSE, fig.margin=TRUE, fig.cap="Donald Rumsfeld."}
 
 knitr::include_graphics("05-probability/images/donald_rumsfeld.jpg")
 
@@ -1126,8 +1126,16 @@ knitr::include_graphics("05-probability/images/donald_rumsfeld.jpg")
 Donald Rumsfeld, the former US Secretary of Defense, once said the following tongue-twisting quote:
 
   "There are known knowns. There are things we know we know. We also know there are known unknowns. That is to say, we know there are some things we do not know. But there are also unknown unknowns, the ones we do not know we do not know."
+  
+```{r, echo=FALSE, fig.margin=TRUE, fig.cap="Three Card Monte."}
 
-What does this mean? Well imagine there are people playing games on the street corners of New York. The guy leading the game flips a coin 50 times and shows that there is approximately equal probability of landing heads or tails. Even if the guy can prove the odds of each result through simulations, that doesn't say anything about what will likely happen when someone in the crowd decides to bet on a certain result.
+knitr::include_graphics("05-probability/images/Three_Card_Monte.jpg")
+
+```
+
+What does this mean? Well imagine a crowd playing Three Card Monte in the streets of New York. The guy running the game runs a demo and shows you all the cards to make you confident. They earn money by making you overconfident and persuading you to bet. Your odds may seem good during the demo round, but that doesn't actually say anything about what will likely happen when the real, high stakes game begins. The person running the game does many simulations, making the "victim" forget that they cannot actually make any conclusions about the odds of winning.
+
+There are some variables that we simply do not know. People can be using slight of hand. They may flip one coin 10 times, but then switch coins when you begin betting.
 
 
 
