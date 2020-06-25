@@ -1109,9 +1109,26 @@ x %>%
 
 ## Key Themes
 
+<!-- VZ: Added introductions to the 4 key themes relevant to this chapter 
+Question: should I add a comment about this being a recurring theme?
+Almost done
+-->
+
 ### Parameter Uncertainty
 
+```{r, echo=FALSE, fig.margin=TRUE, fig.cap="Coin Flip Uncertainty."}
+
+knitr::include_graphics("05-probability/images/coin_flip.jpg")
+
+```
+
+Suppose your friend sets up a pseudo-casino in the playground of the neighborhood school. He's offering everyone the opportunity to play probability games and bet money. The first game is simple: coin tosses. If the coin lands on heads, you get five dollars. If it lands on tails, you pay three dollars.
+
+You have a sneaking suspicion that the coin isn't fair and you ask your friend to flip it 10 times to test your theory. However, you must not be overconfident. 10 observations might be too few to judge the fairness of the coin. Perhaps your friend secretly switches coins when it comes time for the actual betting and your sample in the initial simulation is nonrepresentative. You might be nervous about losing your money and even miscount the number of heads and tails. These are all examples of **parameter uncertainty**. Sometimes, a model has the correct form. But it's not practical to run the simulation millions of times to be certain of the outcome. It's not possible to be absolutely certain that your friend isn't switching coins. A perfect world does not exist, so we must have reservations when drawing likely conclusions.
+
 ### Unmodeled Variation
+
+(This may be difficult to talk about since we don't (?) write down formulas with error terms.) But each chapter should discuss the concept of a residual. Even if we have perfect parameter estimates for a model structure which matches the unknown data generating mechanism, we still won't make perfect predictions. Some randomness is intrinsic. Example: prediction for an individual.
 
 ### Predictive Uncertainty
 
@@ -1133,9 +1150,7 @@ knitr::include_graphics("05-probability/images/Three_Card_Monte.jpg")
 
 ```
 
-What does this mean? Well imagine a crowd playing Three Card Monte in the streets of New York. The guy running the game runs a demo and shows you all the cards to make you confident. They earn money by making you overconfident and persuading you to bet. Your odds may seem good during the demo round, but that doesn't actually say anything about what will likely happen when the real, high stakes game begins. The person running the game does many simulations, making the "victim" forget that they cannot actually make any conclusions about the odds of winning.
-
-There are some variables that we simply do not know. People can be using slight of hand. They may flip one coin 10 times, but then switch coins when you begin betting.
+What does this mean? Well imagine a crowd playing Three Card Monte in the streets of New York. The guy running the game runs a demo and shows you all the cards to make you confident. They earn money by making you overconfident and persuading you to bet. Your odds may seem good during the demo round, but that doesn't actually say anything about what will likely happen when the real, high stakes game begins. The person running the game does many simulations, making the "victim" forget that they cannot actually make any conclusions about the odds of winning. There are some variables that we simply do not know. People can be using slight of hand, for instance.
 
 
 
