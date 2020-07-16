@@ -167,6 +167,8 @@ results <- sample(coin, sims, replace=TRUE)
 
 mydata <- tibble(results)
 
+mydata <- tibble(heads = 50, tails = 50)
+
 ggplot(mydata, aes(x = results)) +
   geom_histogram(aes(y=..count../sum(..count..)), binwidth = 1, 
                  fill = "dark green", color = "white") +
@@ -177,15 +179,15 @@ ggplot(mydata, aes(x = results)) +
 
 ```
 
-An *empirical distribution* is based on data. You can think of this as the probability distribution created by running a simulation.
+An *empirical distribution* is based on data. You can think of this as the probability distribution created by running a simulation. In theory, if we increase the number of coins we flip in our simulation, the empirical distribution will look more and more similar to the mathematical distribution. The probability distribution is the Platonic form. The empirical distribution will often look like the mathematical probability distribution, but it will rarely be exactly the same.
 
 ```{r, echo = FALSE}
 
-# Flipping one coin 1000 times
+# Flipping one coin 100 times
 
 coin <- c(0, 1)
 
-sims <- 1000
+sims <- 100
 
 results <- sample(coin, sims, replace=TRUE)
 
