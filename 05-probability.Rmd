@@ -12,9 +12,9 @@ output_yaml:
 
 <!-- 3) Adding three model example. -->
 
-<!-- 4) Use p(A) everywhere.  -->
+<!-- 4) Use p(A) everywhere. -VZ done -->
 
-<!-- 5) PROBABILITY DOES NOT EXIST. de finetti (photo! Italian?) -->
+<!-- 5) PROBABILITY DOES NOT EXIST. de finetti (photo! Italian?) - done -->
 
 <!-- 6) More animations -->
 
@@ -99,7 +99,7 @@ The central tension, and opportunity, in data science is the interplay between t
 
 ## The Language of Inference
 
-<!-- Read Topic 14 in Bayesian Workshop. Lots of interesting ideas and examples there for this first section of the chapter. Any coding examples should be simple, with  no list-columns and map_* functions. Basic tool we are introducing is doing simulation within a tibble. Consider doing some of the sample problems from STAT 110, many of which are hard to do analytically but easy to do with simulation. Mention what a PDF is, but no math. Show histogram of results from one die and two die. Explain how those histograms are, more or less, PDFs. Explain what p(A), p(B) and p(A, B) using dice/coin examples. PDF. Trump's electoral votes as a PDF. -->
+<!-- Read Topic 14 in Bayesian Workshop. Lots of interesting ideas and examples there for this first section of the chapter. Any coding examples should be simple, with  no list-columns and map_* functions. Basic tool we are introducing is doing simulation within a tibble. Consider doing some of the sample problems from STAT 110, many of which are hard to do analytically but easy to do with simulation. -->
 
 
 ```{r, echo=FALSE, fig.margin=TRUE, fig.cap="Dice and Probability."}
@@ -134,7 +134,7 @@ This allows us to make the following statements:
 
 For the purposes of this course, a *probability distribution* is a mathematical object that covers a set of outcomes, where each distinct outcome has a chance of occurring between 0 and 1. The sum of all chances equals to 1. The set of possible outcomes --- heads or tails for the coin, 1 through 6 for the die --- can be either discrete or continuous. This set of possible outcomes is the *domain* of the probability distribution. There are three types of probability distributions: mathematical, empirical, and posterior. Let's walk through some examples to better understand each type of probability distribution.
 
-Say we are flipping a coin a hundred times.
+Say we are flipping a coin.
 
 A *mathematical distribution* is based on mathematical formulas. Assuming that the dice is perfectly fair, we should get heads as many times as we get tails.
 
@@ -213,7 +213,7 @@ ggplot(mydata, aes(x = results)) +
 
 ```
 
-Now we are rolling a dice a hundred times.
+Now we are rolling two die.
 
 Our *mathematical distribution* tells us that, with a fair dice, the probability of getting 1, 2, 3, 4, 5, and 6 are equal: there is a 1/6 chance of each. When we roll two die at the same time and sum the values, the numbers closes to the middle (ex. 6, 7, 8) are more common sums than numbers at the very edge (ex. 2, 12) because there are more combinations of numbers that add up to the middle values.
 
@@ -305,7 +305,7 @@ ggplot(mydata, aes(x = results)) +
   geom_histogram(aes(y=..count../sum(..count..)), binwidth = 0.5, 
                  fill = "dark gray", color = "white") +
   labs(title = "Posterior Probability Distribution",
-       subtitle = "Rolling One Dice at a Crooked Casino",
+       subtitle = "Rolling Two Die at a Crooked Casino",
        x = "Outcomes",
        y = "Probability") +
   scale_x_continuous(breaks = seq(0,12,1), labels = 0:12) +
@@ -344,7 +344,7 @@ The *empirical distribution* in this case could involve looking into past electi
 
 The *posterior distribution* in the election case is something many data scientists actually devote a lot of time to. Consider this projection from The Economist, which uses various assumptions to generate a forecast. The analysts have developed an algorithm that considers their expectations for each outcome.
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, fig.fullwidth = TRUE}
 
 knitr::include_graphics("05-probability/images/election_distribution.png")
 
@@ -886,8 +886,8 @@ Now, let's switch back to proportion-based probabilities and think about it. Jus
 
 <!-- Note the connection between the marbles from Rethinking and the Bayesian scatterplot. In figure 2.2 in Rethinking represents the model where p = 0.25, where p is the proportion of blue marbles in the total collection. The y-axis models would be labeled with p = 0, 0.25, 0.5, 0.75, and 1. With the tree marble diagram in figure 2.2, we would be taking random samples with 3 marbles. The number of blue marbles we get each time would be plotted along p = 0.25. This is another example of model on the y-axis and data on the x-axis. -->
 
-Imagine there are 10 high schools in your district. Each high school has 1000 students. You are the statistics teacher at high school $A$ and the rest of the 
-high schools are $B$ through $J$. You're really into statistics and you have a 
+Imagine there are 10 high schools in your district. Each high school has 1000 students. You are the statistics teacher at high school *A* and the rest of the 
+high schools are *B* through *J*. You're really into statistics and you have a 
 deep burning desire to know:
 
 * What portion of high school students at my lovely school of $A$ love statistics?
@@ -1131,9 +1131,6 @@ There are a few key takeaways we want to note in this situation.
 
 First, we are uncertain about the actual proportion of the population that loves statistics. This is likely to always be the case - that we are uncertain about the parameter. We won't really know what the true probability is. We can however, become better informed about what it could be. For that, we use models. That is the principle expressed in this in this example. We created a bunch of models for each potential probability and used the results of those models to understand which model is more or less likely to explain our specific results.
 
-Second, 
-
-
 
 ## Testing is Evil
 
@@ -1202,32 +1199,37 @@ x %>%
 
 ## Key Themes
 
-<!-- Mention recurring theme.
--->
+The PPBDS contains several important themes that are relevant in all chapters. As you move through the textbook, you will be building on and refining these concepts. In this chapter, you will learn about model structure, predictive uncertainty, parameter uncertainty, unmodeled variation, and unknown unknowns.
 
-Casino talk.
-
-### Model Structure
-
-Is $P_h$ constant?
-
-### Parameter Uncertainty
-
-```{r, echo=FALSE, fig.margin=TRUE, fig.cap="Coin Flip Uncertainty."}
+```{r, echo=FALSE, fig.margin=TRUE, fig.cap="Probability Themes."}
 
 knitr::include_graphics("05-probability/images/coin_flip.jpg")
 
 ```
 
-$p(MI)$
-
-$p(P_h)$ Only people who hate students do that sort of stuff.
-
-$p(H=10)$
+### Setup
 
 Suppose your friend sets up a pseudo-casino in the playground of the neighborhood school. He's offering everyone the opportunity to play probability games and bet money. The first game is simple: coin tosses. If the coin lands on heads, you get five dollars. If it lands on tails, you pay three dollars.
 
-You have a sneaking suspicion that the coin isn't fair and you ask your friend to flip it 10 times to test your theory. However, you must not be overconfident. 10 observations might be too few to judge the fairness of the coin. Perhaps your friend secretly switches coins when it comes time for the actual betting and your sample in the initial simulation is nonrepresentative. You might be nervous about losing your money and even miscount the number of heads and tails. These are all examples of **parameter uncertainty**. Sometimes, a model has the correct form. But it's not practical to run the simulation millions of times to be certain of the outcome. It's not possible to be absolutely certain that your friend isn't switching coins. A perfect world does not exist, so we must have reservations when drawing likely conclusions.
+### Model Structure
+
+Is $P_h$ constant?
+
+### Predictive Uncertainty
+
+```{r, echo=FALSE, fig.margin=TRUE, fig.cap="PROBABILITY DOES NOT EXIST."}
+
+knitr::include_graphics("05-probability/images/probability_dice.jpeg")
+
+```
+
+A wise, Italian statistician named Bruno de Finetti once famously said "PROBABILITY DOES NOT EXIST." Some call him a "radical probabilist" but he was right to point out that probability is something humans constructed to understand the world; it is not possible to forecast the literal future. The two primary sources of predictive uncertainty are parameter uncertainty and unmodeled variation.
+
+<!-- Still conditional on model structure. p(result from experiment to come) -->
+
+### Parameter Uncertainty
+
+You have a sneaking suspicion that the coin isn't fair and you ask your friend to flip it 10 times to test your theory. However, you must not be overconfident. 10 observations might be too few to judge the fairness of the coin. Perhaps your friend secretly switches coins when it comes time for the actual betting and your sample in the initial simulation is not representative. You might be nervous about losing your money and even miscount the number of heads and tails. These are all examples of *parameter uncertainty*. Sometimes, a model has the correct form, but it's not practical to run the simulation millions of times to be certain of the outcome. It's not possible to be absolutely certain that your friend isn't switching coins. A perfect world does not exist, so we must have reservations when drawing likely conclusions.
 
 ### Unmodeled Variation
 
@@ -1235,17 +1237,11 @@ You have a sneaking suspicion that the coin isn't fair and you ask your friend t
 
 result = model + other stuff, where other stuff is variation which is not part of the model, i.e., it is
 
-
-
 45 = 40 + 5
 
 unmodeled variation. *residual*; *fitted value* *expected value*
 
 result = fitted (expected) value + residual
-
-### Predictive Uncertainty
-
-Still conditional on model structure. p(result from experiment to come)
 
 ### Unknown Unknowns
 
@@ -1265,7 +1261,7 @@ knitr::include_graphics("05-probability/images/Three_Card_Monte.jpg")
 
 ```
 
-What does this mean? Well imagine a crowd playing Three Card Monte in the streets of New York. The guy running the game runs a demo and shows you all the cards to make you confident. They earn money by making you overconfident and persuading you to bet. Your odds may seem good during the demo round, but that doesn't actually say anything about what will likely happen when the real, high stakes game begins. The person running the game does many simulations, making the "victim" forget that they cannot actually make any conclusions about the odds of winning. There are some variables that we simply do not know. People can be using slight of hand, for instance.
+What does this mean? Well imagine a crowd playing Three Card Monte in the streets of New York. The guy running the game runs a demo and shows you all the cards to make you confident. They earn money by making you overconfident and persuading you to bet. Your odds may seem good during the demo round, but that doesn't actually say anything about what will likely happen when the real, high stakes game begins. The person running the game does many simulations, making the "victim" forget that they cannot actually make any conclusions about the odds of winning. There are some variables that we simply do not know even if we put a lot of effort into making posterior probability distributions. People can be using slight of hand, for instance.
 
 
 
