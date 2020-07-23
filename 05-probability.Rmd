@@ -5,7 +5,7 @@ output_yaml:
 
 # Probability
 
-<!-- 1) Add screen shot from https://projects.economist.com/us-2020-forecast/president of electoral vote forecast. This is p(electoral votes for the Democratic nominee) or, shorter p(ev). It is just like all our other p()'s. It is a distribution because all values are between 0 and 1 and the sum is one. But it does not come from either math or from (direct) experience. Instead it is the distribution --- colloquially, the posterior distribution --- which comes from our modeling process. But this p() is, conceptually, the same as all our other p()'s. But what is the equivalent of the mathematical distribution for electoral votes and the empirical distribution? Good question! For math, I think we simulate the electoral vote distribution which would result from each state being a 50/50 toss up. Completely unrealistic, but very mathematical. For the empirical probability distribution, just look at the outcomes for 1960 and after. (I realize that this only gives us 17 values --- all probably unique --- but that is the data we have!) -->
+<!-- 1) Add screen shot from https://projects.economist.com/us-2020-forecast/president of electoral vote forecast. This is p(electoral votes for the Democratic nominee) or, shorter p(ev). It is just like all our other p()'s. It is a distribution because all values are between 0 and 1 and the sum is one. But it does not come from either math or from (direct) experience. Instead it is the distribution --- colloquially, the posterior distribution --- which comes from our modeling process. But this p() is, conceptually, the same as all our other p()'s. But what is the equivalent of the mathematical distribution for electoral votes and the empirical distribution? Good question! For math, I think we simulate the electoral vote distribution which would result from each state being a 50/50 toss up. Completely unrealistic, but very mathematical. For the empirical probability distribution, just look at the outcomes for 1960 and after. (I realize that this only gives us 17 values --- all probably unique --- but that is the data we have!) - done VZ-->
 
 <!-- 2) Get rid of infer package, I think. Do we really need rep_sample_n()? -->
 
@@ -118,21 +118,21 @@ The opening paragraph of *Workshop Statistics:  Discovery with Data, A Bayesian 
 
 What does it mean that Trump has a *30% chance* of winning re-election this fall? That there is a *90% probability* of rain today? That the die at the casino is *unfair*? If I roll that die 10 times and five of those times I get a three, how likely is it that the die is *unfair*?
 
-Probability is about quantifying uncertainty. We can think of probability as a proportion. The probability of an event occurring is a number from 0 to 1, where 1 means that the event is 100% certain.
+Probability is about quantifying uncertainty. We can think of probability as a proportion. The probability of an event occurring is a number from 0 to 1, where 1 means that the event is 100% certain. Throughout this chapter, we will use p() to denote probability distributions. 
 
 Let's begin with the simplest events: coin flips and dice rolls. If the die and 
 the coins are fair, we can operate under the assumption that all outcomes are 
-equally likely.
+equally likely. 
 
 This allows us to make the following statements:
 
-* The probability of rolling either a 1 or 2 is 2/6, or 1/3.  
-* The probability of rolling either 1, 2, 3, 4, 5, or 6 is 1.  
-* The probability of flipping a coin and getting a tail is 1/2.
+* The p(rolling 1 or 2) is 2/6, or 1/3.  
+* The p(rolling 1, 2, 3, 4, 5, or 6) is 1.  
+* The p(flipping a coin and getting tails) is 1/2.
 
 <!-- Be precise about technical terms: outcome and domain. Be more smooth. -->
 
-For the purposes of this course, a *probability distribution* is a mathematical object that covers a set of outcomes, where each distinct outcome has a chance of occurring between 0 and 1. The sum of all chances equals to 1. Throughout this chapter, we will use p() to denote probability distributions. The set of possible outcomes --- heads or tails for the coin, 1 through 6 for the die --- can be either discrete or continuous. This set of possible outcomes is the *domain* of the probability distribution. There are three types of probability distributions: mathematical, empirical, and posterior. Let's walk through some examples to better understand each type of probability distribution.
+For the purposes of this course, a *probability distribution* is a mathematical object that covers a set of outcomes, where each distinct outcome has a chance of occurring between 0 and 1. The sum of all chances equals to 1. The set of possible outcomes --- heads or tails for the coin, 1 through 6 for the die --- can be either discrete or continuous. This set of possible outcomes is the *domain* of the probability distribution. There are three types of probability distributions: mathematical, empirical, and posterior. Let's walk through some examples to better understand each type of probability distribution.
 
 Say we are flipping a coin a hundred times.
 
@@ -152,7 +152,7 @@ ggplot(mydata, aes(x = results)) +
   geom_histogram(aes(y=..count../sum(..count..)), binwidth = 0.5, 
                  fill = "dark gray", color = "white") +
   labs(title = "Mathematical Probability Distribution",
-       subtitle = "Flipping One Coin A Hundred Times",
+       subtitle = "Flipping One Coin",
        x = "Outcomes",
        y = "Probability") +
   scale_x_continuous(breaks = seq(0,1,1), labels = c("Heads", "Tails"))
@@ -206,7 +206,7 @@ ggplot(mydata, aes(x = results)) +
   geom_histogram(aes(y=..count../sum(..count..)), binwidth = 0.5, 
                  fill = "dark gray", color = "white") +
   labs(title = "Posterior Probability Distribution",
-       subtitle = "Flipping One Coin A Hundred Times",
+       subtitle = "Flipping One Coin to Bet Your Friend",
        x = "Outcomes",
        y = "Probability") +
   scale_x_continuous(breaks = seq(0,1,1), labels = c("Heads", "Tails"))
@@ -215,169 +215,15 @@ ggplot(mydata, aes(x = results)) +
 
 Now we are rolling a dice a hundred times.
 
-Our *mathematical distribution* tells us that, with a fair dice, the probability of getting 1, 2, 3, 4, 5, and 6 are equal: there is a 1/6 chance of each.
+Our *mathematical distribution* tells us that, with a fair dice, the probability of getting 1, 2, 3, 4, 5, and 6 are equal: there is a 1/6 chance of each. When we roll two die at the same time and sum the values, the numbers closes to the middle (ex. 6, 7, 8) are more common sums than numbers at the very edge (ex. 2, 12) because there are more combinations of numbers that add up to the middle values.
 
 ```{r, echo=FALSE}
-
-# Flipping a dice 1000 times
-
-dice <- c(1:6)
-
-sims <- 1000000
-
-mydata <- tibble(dice_1 = sample(dice, size = sims, replace = TRUE))
-
-ggplot(mydata, aes(x = dice_1)) +
-  geom_histogram(aes(y=..count../sum(..count..)), binwidth = 0.5, 
-                 fill = "dark gray", color = "white") +
-  labs(title = "Mathematical Probability Distribution",
-       subtitle = "Rolling One Dice A Hundred Times",
-       x = "Outcomes",
-       y = "Probability") +
-  scale_x_continuous(breaks = seq(0,6,1), labels = 0:6) +
-  theme_classic()
-
-```
-We get an *empirical distribution* by running a simulation and flipping the coin a hundred times. The printed tibble shows us that we rolled 21 6's, but only 12 3's. The p(1) is not equal to p(2) and almost every outcome occurred a different number of times.
-
-```{r, echo=FALSE}
-
-# Flipping a dice 100 times
 
 set.seed(1)
 
 dice <- c(1:6)
 
-sims <- 100
-
-mydata <- tibble(dice_1 = sample(dice, size = sims, replace = TRUE))
-
-mydata %>%
-  group_by(dice_1) %>%
-  count() %>%
-  rename(value = dice_1, count = n)
-
-ggplot(mydata, aes(x = dice_1)) +
-  geom_histogram(aes(y=..count../sum(..count..)), binwidth = 0.5, 
-                 fill = "dark gray", color = "white") +
-  labs(title = "Empirical Probability Distribution",
-       subtitle = "Rolling One Dice A Hundred Times"
-       x = "Outcomes",
-       y = "Probability") +
-  scale_x_continuous(breaks = seq(0,6,1), labels = 0:6) +
-  theme_classic()
-
-```
-
-```{r, echo=FALSE}
-
-mydata %>%
-  group_by(dice_1) %>%
-  count() %>%
-  rename(value = dice_1, count = n)
-
-```
-The *posterior distribution* for rolling one dice a hundred times will vary based on your expectations. If you take the dice from your Monopoly set, you have reason to believe that the mathematical distribution is true. However, if you walk into a crooked casino and a host offers you money when you roll a number above 2, you might believe that 1's and 2's are more common than anything else.
-
-
-Past: How many electoral votes would Hilary Clinton have won if she picked a different VP?
-Present: What is the median height of Harvard students?
-Future: How many electoral votes will a presidential candidate win?
-
-A posterior distribution for a more complicated issue like electoral votes requires more nuanced expectations. See this projection from The Economist, which uses various assumptions to generate a forecast.
-
-```{r, echo=FALSE, fig.margin=TRUE, fig.cap="Dice and Probability."}
-
-knitr::include_graphics("05-probability/images/election_distribution.png")
-
-```
-
-<!-- 1) Initial part of the chapter will begin with three examples, each of which shows us three different sorts of probability distributions: mathematical, empirical, posterior. The three examples are flipping one coin, rolling two dice and the distribution of electoral votes. We do all three types for a coin, then all three for two dice and, finally, all three for electoral votes. Recall that a probability distribution is a mathematical object which covers a set of outcomes. All distinct outcomes have chances of occurring between 0 and 1. The sum of all the chances equals 1. We use `p()` as our symbol for probability distributions, with context demonstrating which type of probability distribution --- mathematical, empirical, posterior --- it is. -->
-
-<!-- There are three kinds of probability distributions: mathematical, empirical and posterior. There are *mathematical* distributions (which are mathematical formulas, using fair dice). There are *empirical* distributions (which are data). Compare math of two dice and empirical data resulting from rolling the pair 20 times. The probability distribution is the Platonic form. The empirical distribution will often look like the mathematical probability distribution, but it will rarely be exactly the same. The third type of distribution is a *posterior* distribution, which is a measures of your belief about things you can't see right now. You can have posterior distributions about things in the past --- How many electoral votes would Hilary Clinton have won if she picked a different VP? About things in the present --- What is the median height of Harvard students? And about things in the future --- How many electoral votes will Joe Biden win?  -->
-
-Now, let's take our understanding of probability and apply it to a data science context.
-
-Flipping 1 coin 1 time gives us a flat histogram:
-
-```{r, echo = FALSE}
-
-# Flipping one coin
-
-coin <- c(0, 1)
-
-sims <- 1
-
-results <- sample(coin, sims, replace=TRUE)
-
-mydata <- tibble(results)
-
-ggplot(mydata, aes(x = results)) +
-  geom_histogram(aes(y=..count../sum(..count..)), binwidth = 1, 
-                 fill = "dark green", color = "white") +
-  labs(title = "Histogram Probability Distribution for Flipping One Coin",
-       x = "Outcomes",
-       y = "Probability") +
-  scale_x_continuous(breaks = seq(0,1,1), labels = 0:1)
-
-```
-
-Flipping a single coin 1,000 times generates an empirical probability distribution with a value of around 0.5 for both heads and tails. Notice that the sum of the probabilities is 1.
-
-```{r, echo = FALSE}
-
-# Flipping one coin 1000 times
-
-coin <- c(0, 1)
-
-sims <- 1000
-
-results <- sample(coin, sims, replace=TRUE)
-
-mydata <- tibble(results)
-
-ggplot(mydata, aes(x = results)) +
-  geom_histogram(aes(y=..count../sum(..count..)), binwidth = 1, 
-                 fill = "dark green", color = "white") +
-  labs(title = "Histogram Probability Distribution for Flipping One Coin",
-       x = "Outcomes",
-       y = "Probability") +
-  scale_x_continuous(breaks = seq(0,1,1), labels = 0:1)
-
-```
-
-Here is the result of rolling a dice 1000 times:
-
-```{r, echo=FALSE}
-
-# Flipping a dice 1000 times
-
-dice <- c(1:6)
-
-sims <- 1000
-
-mydata <- tibble(dice_1 = sample(dice, size = sims, replace = TRUE))
-
-ggplot(mydata, aes(x = dice_1)) +
-  geom_histogram(aes(y=..count../sum(..count..)), binwidth = 1, 
-                 fill = "dark green", color = "white") +
-  labs(title = "Histogram Probability Distribution",
-       x = "Value of dice roll",
-       y = "Probability") +
-  scale_x_continuous(breaks = seq(0,6,1), labels = 0:6) +
-  theme_classic()
-
-```
-
-This is the result of rolling the same 2 die 1000 times:
-
-```{r, echo=FALSE}
-
-# Two die rolled 1000 times
-
-dice <- c(1:6)
-
-sims <- 1000
+sims <- 10000000
 
 mydata <- tibble(dice_1 = sample(dice, size = sims, replace = TRUE),
                  dice_2 = sample(dice, size = sims, replace = TRUE))
@@ -387,14 +233,128 @@ mydata <- mydata %>%
 
 ggplot(mydata, aes(x = sum)) +
   geom_histogram(aes(y=..count../sum(..count..)), binwidth = 1, 
-                 fill = "dark green", color = "white") +
-  labs(title = "Histogram Probability Distribution for Rolling 2 Die 1000 times",
-       x = "Sum of two die",
+                 fill = "dark gray", color = "white") +
+  labs(title = "Mathematical Probability Distribution",
+       subtitle = "Sums from Rolling Two",
+       x = "Outcomes",
        y = "Probability") +
   scale_x_continuous(breaks = seq(0,12,1), labels = 0:12) +
   theme_classic()
 
 ```
+
+We get an *empirical distribution* by running a simulation and rolling two die a hundred times. The result is not as perfect and even as the mathematical distribution, but we can observe that the p(2) and p(12), which are displayed on the left and right most ends of the distribution, are far lower than the p(values near the center of the distribution).
+
+```{r, echo=FALSE}
+
+# Two die rolled 100 times
+
+set.seed(1)
+
+dice <- c(1:6)
+
+sims <- 100
+
+mydata <- tibble(dice_1 = sample(dice, size = sims, replace = TRUE),
+                 dice_2 = sample(dice, size = sims, replace = TRUE))
+
+mydata <- mydata %>%
+  mutate(sum = (dice_1 + dice_2))
+
+ggplot(mydata, aes(x = sum)) +
+  geom_histogram(aes(y=..count../sum(..count..)), binwidth = 1, 
+                 fill = "dark gray", color = "white") +
+  labs(title = "Empirical Probability Distribution",
+       subtitle = "Sums from Rolling Two Die A Hundred Times",
+       x = "Outcomes",
+       y = "Probability") +
+  scale_x_continuous(breaks = seq(0,12,1), labels = 0:12) +
+  theme_classic()
+
+```
+
+```{r, echo=FALSE}
+
+mydata %>%
+  group_by(sum) %>%
+  count()
+
+```
+The *posterior distribution* for rolling one dice a hundred times will vary based on your expectations. If you take the dice from your Monopoly set, you have reason to believe that the mathematical distribution is true. However, if you walk into a crooked casino and a host asks you to play craps, you might be suspicious. You win by rolling 7's and 11's. You might expect those numbers to very rarely occur. You might also expect values like 2, which are statistically less probable, to occur more frequently.
+
+```{r, echo=FALSE}
+
+# Flipping a dice 100 times
+
+mydata <- tibble(
+  results = c(
+    rep(2, 30),
+    rep(3, 15),
+    rep(4, 15),
+    rep(5, 3),
+    rep(6, 2),
+    rep(7, 1),
+    rep(8, 5),
+    rep(9, 5),
+    rep(10, 5),
+    rep(11,1),
+    rep(12,3)
+))
+
+ggplot(mydata, aes(x = results)) +
+  geom_histogram(aes(y=..count../sum(..count..)), binwidth = 0.5, 
+                 fill = "dark gray", color = "white") +
+  labs(title = "Posterior Probability Distribution",
+       subtitle = "Rolling One Dice at a Crooked Casino",
+       x = "Outcomes",
+       y = "Probability") +
+  scale_x_continuous(breaks = seq(0,12,1), labels = 0:12) +
+  theme_classic()
+
+```
+Now we let's say we are building probability distributions for political events, like a presidential election. We want to know p(Candidate A wins the election).
+
+It would be incredibly naive to create the following *mathematical distribution*.
+
+<!-- VZ: Could we review this section? Not sure this is what I should say about the mathematical distribution -->
+
+```{r, echo = FALSE}
+
+# Flipping one coin 100 times
+
+mydata <- tibble(
+  results = c(
+    rep(0, 50),
+    rep(1, 50)
+))
+
+ggplot(mydata, aes(x = results)) +
+  geom_histogram(aes(y=..count../sum(..count..)), binwidth = 0.5, 
+                 fill = "dark gray", color = "white") +
+  labs(title = "Mathematical Probability Distribution",
+       subtitle = "Probability of Parties Winning",
+       x = "Outcomes",
+       y = "Probability") +
+  scale_x_continuous(breaks = seq(0,1,1), labels = c("Republicans", "Democrats"))
+
+```
+We know that campaign platforms, donations, charisma, and many other factors will contribute to a candidate's likeability. Elections are more complicated than coin tosses. Some polticial scientists may try to create algorithms to calculate mathematical probability distributions.
+
+The *empirical distribution* in this case could involve looking into past elections in the United States and counting the number of elections that each party has won.
+
+The *posterior distribution* in the election case is something many data scientists actually devote a lot of time to. Consider this projection from The Economist, which uses various assumptions to generate a forecast. The analysts have developed an algorithm that considers their expectations for each outcome.
+
+```{r, echo=FALSE}
+
+knitr::include_graphics("05-probability/images/election_distribution.png")
+
+```
+
+There are many political science questions you could explore with posterior distributions and they can relate to the past, present, and future.
+
+* Past: How many electoral votes would Hilary Clinton have won if she picked a different VP?
+* Present: What is the median height of Harvard students?
+* Future: How many electoral votes will a presidential candidate win?
 
 <!-- VZ: Do we still want this? I deleted the part about histograms-->
 
