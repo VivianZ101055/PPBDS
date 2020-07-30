@@ -245,15 +245,9 @@ ggplot(mydata, aes(x = results)) +
 ```
 
 Now we are rolling two die.
-<<<<<<< HEAD
 
 Our *mathematical distribution* tells us that, with a fair dice, p(1), p(2), p(3), p(4), p(5), and p(6) are equal: there is a 1/6 chance of each. When we roll two die at the same time and sum the values, the numbers closes to the middle (ex. 6, 7, 8) are more common sums than numbers at the very edge (ex. 2, 12) because there are more combinations of numbers that add up to the middle values.
 
-=======
-
-Our *mathematical distribution* tells us that, with a fair dice, the probability of getting 1, 2, 3, 4, 5, and 6 are equal: there is a 1/6 chance of each. When we roll two die at the same time and sum the values, the numbers closes to the middle (ex. 6, 7, 8) are more common sums than numbers at the very edge (ex. 2, 12) because there are more combinations of numbers that add up to the middle values.
-
->>>>>>> master
 ```{r, echo=FALSE}
 
 set.seed(1)
@@ -376,7 +370,6 @@ ggplot(mydata, aes(x = results)) +
 
 ```
 We know that campaign platforms, donations, charisma, and many other factors will contribute to a candidate's likeability. Elections are more complicated than coin tosses. Some polticial scientists may try to create algorithms to calculate mathematical probability distributions.
-<<<<<<< HEAD
 
 The *empirical distribution* in this case could involve looking into past elections in the United States and counting the number of elections that each party has won.
 
@@ -396,27 +389,6 @@ There are many political science questions you could explore with posterior dist
 
 <!-- VZ: Do we still want this? I deleted the part about histograms-->
 
-=======
-
-The *empirical distribution* in this case could involve looking into past elections in the United States and counting the number of elections that each party has won.
-
-The *posterior distribution* in the election case is something many data scientists actually devote a lot of time to. Consider this projection from The Economist, which uses various assumptions to generate a forecast. The analysts have developed an algorithm that considers their expectations for each outcome.
-
-```{r, echo=FALSE, fig.fullwidth = TRUE}
-
-knitr::include_graphics("05-probability/images/election_distribution.png")
-
-```
-
-There are many political science questions you could explore with posterior distributions and they can relate to the past, present, and future.
-
-* Past: How many electoral votes would Hilary Clinton have won if she picked a different VP?
-* Present: What is the median height of Harvard students?
-* Future: How many electoral votes will a presidential candidate win?
-
-<!-- VZ: Do we still want this? I deleted the part about histograms-->
-
->>>>>>> master
 Using our knowledge of PDFs and simulations, we can solve a problem.
 
 What are the odds of that the sum of two die will be seven? We could figure this out analytically, but a simulation in R is a easy way to predict and confirm our expected probability.
@@ -1261,15 +1233,9 @@ x %>%
 The PPBDS contains several important themes that are relevant in all chapters. As you move through the textbook, you will be building on and refining these concepts. In this chapter, you will learn about model structure, predictive uncertainty, parameter uncertainty, unmodeled variation, and unknown unknowns.
 
 ```{r, echo=FALSE, fig.margin=TRUE, fig.cap="Probability Themes."}
-<<<<<<< HEAD
 
 knitr::include_graphics("05-probability/images/coin_flip.jpg")
 
-=======
-
-knitr::include_graphics("05-probability/images/coin_flip.jpg")
-
->>>>>>> master
 ```
 
 ### Setup
@@ -1289,15 +1255,9 @@ knitr::include_graphics("05-probability/images/probability_dice.jpeg")
 ```
 
 A wise, Italian statistician named Bruno de Finetti once famously said "PROBABILITY DOES NOT EXIST." Some call him a "radical probabilist" but he was right to point out that probability is something humans constructed to understand the world; it is not possible to forecast the literal future. The two primary sources of predictive uncertainty are parameter uncertainty and unmodeled variation.
-<<<<<<< HEAD
 
 <!-- Still conditional on model structure. p(result from experiment to come) -->
 
-=======
-
-<!-- Still conditional on model structure. p(result from experiment to come) -->
-
->>>>>>> master
 ### Parameter Uncertainty
 
 You have a sneaking suspicion that the coin isn't fair and you ask your friend to flip it 10 times to test your theory. However, you must not be overconfident. 10 observations might be too few to judge the fairness of the coin. Perhaps your friend secretly switches coins when it comes time for the actual betting and your sample in the initial simulation is not representative. You might be nervous about losing your money and even miscount the number of heads and tails. These are all examples of *parameter uncertainty*. Sometimes, a model has the correct form, but it's not practical to run the simulation millions of times to be certain of the outcome. It's not possible to be absolutely certain that your friend isn't switching coins. A perfect world does not exist, so we must have reservations when drawing likely conclusions.
