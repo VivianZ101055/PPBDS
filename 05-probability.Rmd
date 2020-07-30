@@ -501,7 +501,7 @@ Now the tree branches out.
 
 We decide to go down the top branch *if* our random person has the disease. We go down the bottom branch *if* they do not. This is called **conditional probability**. The probability of testing positive is **dependent** on whether the person has the disease.
 
-How would you express this in statistical notation? P(A|B) is the same thing as the probability of A *given* B. P(A|B) essentially means the probability of A *if* we know for sure that B is true.
+How would you express this in statistical notation? p(A|B) is the same thing as the probability of A *given* B. p(A|B) essentially means the probability of A *if* we know for sure that B is true. You should also remember that p(A|B) is not the same thing as p(B|A).
 
 ```{marginfigure}
 **Positive:** The test results suggest that the patient has the disease.
@@ -605,8 +605,6 @@ text(340,150,"P(Positive | No Disease)",cex=.5)
 ```
 
 This concept of conditional probability is relevant in our everyday lives. For example, the probability of Trump's re-election might be different than the probability of Trump's re-election *given* that we are in a recession. The probability of you reading a textbook might vary, *depending* on the likelihood of your instructor cold-calling you in class. Whenever you encounter a question involving conditional probability, drawing a tree diagram is a very useful approach to visualization.
-
-<!-- EC: This could be a good section to include a disclaimer about not mixing up P(B|A) and P(A|B). Alternatively, could add more examples to the section below that mentions they are different, since it is mentioned in passing -->
 
 ### Two Diagrams for One Set of Coin Flips
 
@@ -745,15 +743,34 @@ plot(rEG, edgeAttrs=eAttrs, attrs=attributes)
 
 ```
 
-<!-- # Section 2: Trees as a formal structure for probability -->
+### Joint Probability
 
-<!-- 2 a) Describe trees. Show some diagrams. (Maybe save making these for later? Are their R packages for this?) This is the basic structure which we will use for everything in the chapter. We can make trees for the examples above. We can discuss important statistical concepts: like conditional probability, marginal probability in the context of a tree. We can highlight subtle cases: Like throw two dice together versus throw one dice and then a second dice. These make for different tree structures, but the same set of leaves. Show an unbalanced tree, in which one branch is a different length, like a craps game or maybe blackjack. Again, no mathematical formalism. Also, no Bayesian stuff. We are just taking the same examples from above and making them a little more structured.  -->
+Now that we understand both p(A) and p(A|B), let's talk about what it means to calculate p(A, B). With p(A|B), we are considering the probability of A assuming event B has already occurred. p(A, B) is the chance that both events will occur at the same point in time.
 
-<!--https://github.com/YuLab-SMU/treedata-book is useful for tree diagrams-->
+Let's say that you are rolling two six-sided die simultaneously. One is weighted so that there is a 50% chance of rolling a 6 and a 10% chance of each of the other values. The other is weighted so there is a 50% chance of rolling a 5 and a 10% chance of rolling each of the other values. Let's roll both die 1000 times. If we were to visualize this, it would look different because the domain is a plane instead of a line.
 
-<!-- Discuss conditional probability and marginal probability using a simple tree with 0.6/0.4 first branch, and then next branches slightly different: 0.8/0.2 and 0.1/0.9. -->
+```{r, echo=FALSE}
 
-<!-- We a tree, we can explain total probability, conditional probability and marginal probabity. Explain the meaning of p(A, B), p(A), p(B) and p(B|A). But that is it. Nothing more mathematical than that. Focus on words, directly connected to the tree images. -->
+mydata <- tibble(die.1 = sample(1:6, size = 1000, prob =
+                                  c(0.1,0.1,0.1,0.1,0.1,0.5), replace = TRUE),
+                 die.2 = sample(1:6, size = 1000, prob =
+                                  c(0.1,0.1,0.1,0.1,0.5,0.1), replace = TRUE)) %>%
+  group_by(die.1, die.2) %>%
+  summarize(total = n()) %>%
+  ungroup() %>%
+  mutate(probability = total/sum(total))
+
+mydata
+
+```
+
+The fact that we're talking about joint distributions where we roll two die doesn't change the meaning of a probability distribution. As you can see through the tibble, the sum of the probabilities of all the outcomes is 1.
+
+```{r}
+
+sum(mydata$probability)
+
+```
 
 <!-- 2 b) Another coding session, but this time with list-columns and map_functions. These do not have to be long. We just want to re-iterate the points we made in words. Maybe we don't need list-columns. Maybe just show map functions here. Again, the point of this section is ONLY to understand the key probabity concepts: joint, total, conditional and marginal. -->
 
