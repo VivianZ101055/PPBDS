@@ -238,7 +238,7 @@ mydata <- tibble(
 
 ggplot(mydata, aes(x = results)) +
   geom_histogram(aes(y=..count../sum(..count..)), binwidth = 0.5, 
-                 fill = "light blue", color = "white") +
+                 fill = "dark gray", color = "white") +
   labs(title = "Posterior Probability Distribution",
        subtitle = "Flipping One Coin to Bet Your Friend",
        x = "Outcomes",
@@ -247,7 +247,7 @@ ggplot(mydata, aes(x = results)) +
 
 ```
 
-### Rolling Two Die
+Now we are rolling two die.
 
 Our *mathematical distribution* tells us that, with a fair dice, the probability of getting 1, 2, 3, 4, 5, and 6 are equal: there is a 1/6 chance of each. When we roll two die at the same time and sum the values, the numbers closes to the middle (ex. 6, 7, 8) are more common sums than numbers at the very edge (ex. 2, 12) because there are more combinations of numbers that add up to the middle values.
 
@@ -267,7 +267,7 @@ mydata <- mydata %>%
 
 ggplot(mydata, aes(x = sum)) +
   geom_histogram(aes(y=..count../sum(..count..)), binwidth = 1, 
-                 fill = "light blue", color = "white") +
+                 fill = "dark gray", color = "white") +
   labs(title = "Mathematical Probability Distribution",
        subtitle = "Sums from Rolling Two",
        x = "Outcomes",
@@ -297,7 +297,7 @@ mydata <- mydata %>%
 
 ggplot(mydata, aes(x = sum)) +
   geom_histogram(aes(y=..count../sum(..count..)), binwidth = 1, 
-                 fill = "light blue", color = "white") +
+                 fill = "dark gray", color = "white") +
   labs(title = "Empirical Probability Distribution",
        subtitle = "Sums from Rolling Two Die A Hundred Times",
        x = "Outcomes",
@@ -307,11 +307,92 @@ ggplot(mydata, aes(x = sum)) +
 
 ```
 
+```{r, echo=FALSE}
+
+mydata %>%
+  group_by(sum) %>%
+  count()
+
+```
 The *posterior distribution* for rolling one dice a hundred times will vary based on your expectations. If you take the dice from your Monopoly set, you have reason to believe that the mathematical distribution is true. However, if you walk into a crooked casino and a host asks you to play craps, you might be suspicious. You win by rolling 7's and 11's. You might expect those numbers to very rarely occur. You might also expect values like 2, which are statistically less probable, to occur more frequently.
 
 ```{r, echo=FALSE}
 
 # Flipping a dice 100 times
+
+mydata <- tibble(
+  results = c(
+    rep(2, 30),
+    rep(3, 15),
+    rep(4, 15),
+    rep(5, 3),
+    rep(6, 2),
+    rep(7, 1),
+    rep(8, 5),
+    rep(9, 5),
+    rep(10, 5),
+    rep(11,1),
+    rep(12,3)
+))
+
+ggplot(mydata, aes(x = results)) +
+  geom_histogram(aes(y=..count../sum(..count..)), binwidth = 0.5, 
+                 fill = "dark gray", color = "white") +
+  labs(title = "Posterior Probability Distribution",
+       subtitle = "Rolling Two Die at a Crooked Casino",
+       x = "Outcomes",
+       y = "Probability") +
+  scale_x_continuous(breaks = seq(0,12,1), labels = 0:12) +
+  theme_classic()
+
+```
+Now we let's say we are building probability distributions for political events, like a presidential election. We want to know p(Candidate A wins the election).
+
+It would be incredibly naive to create the following *mathematical distribution*.
+
+<!-- VZ: Could we review this section? Not sure this is what I should say about the mathematical distribution -->
+
+```{r, echo = FALSE}
+
+# Flipping one coin 100 times
+
+mydata <- tibble(
+  results = c(
+    rep(0, 50),
+    rep(1, 50)
+))
+
+ggplot(mydata, aes(x = results)) +
+  geom_histogram(aes(y=..count../sum(..count..)), binwidth = 0.5, 
+                 fill = "dark gray", color = "white") +
+  labs(title = "Mathematical Probability Distribution",
+       subtitle = "Probability of Parties Winning",
+       x = "Outcomes",
+       y = "Probability") +
+  scale_x_continuous(breaks = seq(0,1,1), labels = c("Republicans", "Democrats"))
+
+```
+We know that campaign platforms, donations, charisma, and many other factors will contribute to a candidate's likeability. Elections are more complicated than coin tosses. Some polticial scientists may try to create algorithms to calculate mathematical probability distributions.
+
+The *empirical distribution* in this case could involve looking into past elections in the United States and counting the number of elections that each party has won.
+
+The *posterior distribution* in the election case is something many data scientists actually devote a lot of time to. Consider this projection from The Economist, which uses various assumptions to generate a forecast. The analysts have developed an algorithm that considers their expectations for each outcome.
+
+```{r, echo=FALSE, fig.fullwidth = TRUE}
+
+knitr::include_graphics("05-probability/images/election_distribution.png")
+
+```
+
+There are many political science questions you could explore with posterior distributions and they can relate to the past, present, and future.
+
+* Past: How many electoral votes would Hilary Clinton have won if she picked a different VP?
+* Present: What is the median height of Harvard students?
+* Future: How many electoral votes will a presidential candidate win?
+
+<!-- VZ: Do we still want this? I deleted the part about histograms-->
+
+Using our knowledge of PDFs and simulations, we can solve a problem.
 
 mydata <- tibble(
   results = c(
