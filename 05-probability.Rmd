@@ -5,7 +5,10 @@ output_yaml:
 
 # Probability
 
-<!-- 1) The "p" in p() is always lower case. It is fine if p sometimes has subscripts, but be careful not to confuse students. Example $p_H$ could be used to refer to the probability of heads, which we can also write as p(H) or p(Heads). Note that there is a difference between p(H) and p(Coin).  The p(H) refers to a singel number, the probability of Heads, which must be a number between zero and one. The p(Coin) refers to the entire probability distribution, the probability of both Heads and of Coins. -->
+<!-- 1) The "p" in p() is always lower case. It is fine if p sometimes has subscripts, but be careful not to confuse students. Example $p_H$ could be used to refer to the probability of heads, which we can also write as p(H) or p(Heads). Note that there is a difference between p(H) and p(Coin).  The p(H) refers to a singel number, the probability of Heads, which must be a number between zero and one. The p(Coin) refers to the entire probability distribution, the probability of both Heads and of Coins. - 
+
+done VZ (changed to small p, added a section at the start of the probability distribution section on the difference between p(H) and p(Coin)-->
+
 
 <!-- Add joint probability discussion in Tree part. That is, explain what p(A, B) is now that they understand p(A). Entire purpose of Tree section is to explain joint probability and conditional probability. That is, p(A, B) and p(A | B). -->
 
@@ -163,9 +166,9 @@ This allows us to make the following statements:
 
 <!-- Be precise about technical terms: outcome and domain. Be more smooth. -->
 
-For the purposes of this course, a *probability distribution* is a mathematical object that covers a set of outcomes, where each distinct outcome has a chance of occurring between 0 and 1. The sum of all chances equals to 1. The set of possible outcomes --- heads or tails for the coin, 1 through 6 for the die --- can be either discrete or continuous. This set of possible outcomes is the *domain* of the probability distribution. There are three types of probability distributions: mathematical, empirical, and posterior. Let's walk through some examples to better understand each type of probability distribution.
+For the purposes of this course, a *probability distribution* is a mathematical object that covers a set of outcomes, where each distinct outcome has a chance of occurring between 0 and 1. The sum of all chances equals to 1. The set of possible outcomes --- heads or tails for the coin, 1 through 6 for the die --- can be either discrete or continuous. This set of possible outcomes is the *domain* of the probability distribution. You should remember that there's a difference between p(heads) and p(coin), since p(heads) refers to one of the entries on the domain whereas p(coin) refers to the entire probability distribution. There are three types of probability distributions: mathematical, empirical, and posterior. Let's walk through some examples to better understand each type of probability distribution.
 
-Say we are flipping a coin.
+### Flipping A Coin
 
 A *mathematical distribution* is based on mathematical formulas. Assuming that the dice is perfectly fair, we should get heads as many times as we get tails.
 
@@ -181,7 +184,7 @@ mydata <- tibble(
 
 ggplot(mydata, aes(x = results)) +
   geom_histogram(aes(y=..count../sum(..count..)), binwidth = 0.5, 
-                 fill = "dark gray", color = "white") +
+                 fill = "light blue", color = "white") +
   labs(title = "Mathematical Probability Distribution",
        subtitle = "Flipping One Coin",
        x = "Outcomes",
@@ -210,7 +213,7 @@ mydata <- tibble(results)
 
 ggplot(mydata, aes(x = results)) +
   geom_histogram(aes(y=..count../sum(..count..)), binwidth = 0.5, 
-                 fill = "dark gray", color = "white") +
+                 fill = "light blue", color = "white") +
   labs(title = "Empirical Probability Distribution",
        subtitle = "Flipping One Coin A Hundred Times",
        x = "Outcomes",
@@ -235,7 +238,7 @@ mydata <- tibble(
 
 ggplot(mydata, aes(x = results)) +
   geom_histogram(aes(y=..count../sum(..count..)), binwidth = 0.5, 
-                 fill = "dark gray", color = "white") +
+                 fill = "light blue", color = "white") +
   labs(title = "Posterior Probability Distribution",
        subtitle = "Flipping One Coin to Bet Your Friend",
        x = "Outcomes",
@@ -244,7 +247,7 @@ ggplot(mydata, aes(x = results)) +
 
 ```
 
-Now we are rolling two die.
+### Rolling Two Die
 
 Our *mathematical distribution* tells us that, with a fair dice, the probability of getting 1, 2, 3, 4, 5, and 6 are equal: there is a 1/6 chance of each. When we roll two die at the same time and sum the values, the numbers closes to the middle (ex. 6, 7, 8) are more common sums than numbers at the very edge (ex. 2, 12) because there are more combinations of numbers that add up to the middle values.
 
@@ -264,7 +267,7 @@ mydata <- mydata %>%
 
 ggplot(mydata, aes(x = sum)) +
   geom_histogram(aes(y=..count../sum(..count..)), binwidth = 1, 
-                 fill = "dark gray", color = "white") +
+                 fill = "light blue", color = "white") +
   labs(title = "Mathematical Probability Distribution",
        subtitle = "Sums from Rolling Two",
        x = "Outcomes",
@@ -294,7 +297,7 @@ mydata <- mydata %>%
 
 ggplot(mydata, aes(x = sum)) +
   geom_histogram(aes(y=..count../sum(..count..)), binwidth = 1, 
-                 fill = "dark gray", color = "white") +
+                 fill = "light blue", color = "white") +
   labs(title = "Empirical Probability Distribution",
        subtitle = "Sums from Rolling Two Die A Hundred Times",
        x = "Outcomes",
@@ -304,13 +307,6 @@ ggplot(mydata, aes(x = sum)) +
 
 ```
 
-```{r, echo=FALSE}
-
-mydata %>%
-  group_by(sum) %>%
-  count()
-
-```
 The *posterior distribution* for rolling one dice a hundred times will vary based on your expectations. If you take the dice from your Monopoly set, you have reason to believe that the mathematical distribution is true. However, if you walk into a crooked casino and a host asks you to play craps, you might be suspicious. You win by rolling 7's and 11's. You might expect those numbers to very rarely occur. You might also expect values like 2, which are statistically less probable, to occur more frequently.
 
 ```{r, echo=FALSE}
@@ -334,7 +330,7 @@ mydata <- tibble(
 
 ggplot(mydata, aes(x = results)) +
   geom_histogram(aes(y=..count../sum(..count..)), binwidth = 0.5, 
-                 fill = "dark gray", color = "white") +
+                 fill = "light blue", color = "white") +
   labs(title = "Posterior Probability Distribution",
        subtitle = "Rolling Two Die at a Crooked Casino",
        x = "Outcomes",
@@ -343,11 +339,12 @@ ggplot(mydata, aes(x = results)) +
   theme_classic()
 
 ```
+
+### Presidential Elections
+
 Now we let's say we are building probability distributions for political events, like a presidential election. We want to know p(Candidate A wins the election).
 
 It would be incredibly naive to create the following *mathematical distribution*.
-
-<!-- VZ: Could we review this section? Not sure this is what I should say about the mathematical distribution -->
 
 ```{r, echo = FALSE}
 
@@ -361,7 +358,7 @@ mydata <- tibble(
 
 ggplot(mydata, aes(x = results)) +
   geom_histogram(aes(y=..count../sum(..count..)), binwidth = 0.5, 
-                 fill = "dark gray", color = "white") +
+                 fill = "light blue", color = "white") +
   labs(title = "Mathematical Probability Distribution",
        subtitle = "Probability of Parties Winning",
        x = "Outcomes",
@@ -369,11 +366,26 @@ ggplot(mydata, aes(x = results)) +
   scale_x_continuous(breaks = seq(0,1,1), labels = c("Republicans", "Democrats"))
 
 ```
-We know that campaign platforms, donations, charisma, and many other factors will contribute to a candidate's likeability. Elections are more complicated than coin tosses. Some polticial scientists may try to create algorithms to calculate mathematical probability distributions.
+We know that campaign platforms, donations, charisma, and many other factors will contribute to a candidate's likability. Elections are more complicated than coin tosses. Some political scientists may try to create algorithms to calculate mathematical probability distributions.
 
-The *empirical distribution* in this case could involve looking into past elections in the United States and counting the number of elections that each party has won.
+The *empirical distribution* in this case could involve looking into past elections in the United States and counting the number of elections that each party has won. Perhaps we're interested specifically in the electoral votes that the Democrats receive. For the empirical distribution, we would create a tibble from past elections. Looking at elections since 1964, we can observe that the number of electoral votes that the Democrats received in each one is different. Given that we only have 14 entries, it is difficult to draw conclusions or make predictions based off of this empirical distribution.
 
-The *posterior distribution* in the election case is something many data scientists actually devote a lot of time to. Consider this projection from The Economist, which uses various assumptions to generate a forecast. The analysts have developed an algorithm that considers their expectations for each outcome.
+```{r, echo = FALSE}
+
+mydata <- tibble(
+  electoral_votes = c(486,191,17,297,49,13,111,370,379,
+                      271,286,365,332,304))
+
+ggplot(mydata, aes(x = electoral_votes)) +
+  geom_histogram(aes(y=..count../sum(..count..)), bins = 100, fill = "light blue", color = "white") +
+  labs(title = "Mathematical Probability Distribution",
+       subtitle = "Probability of Parties Winning",
+       x = "Outcomes",
+       y = "Probability")
+
+```
+
+The *posterior distribution* in the election case is something many data scientists actually devote a lot of time to. Consider this projection from The Economist, which uses various assumptions to generate a forecast. The analysts have developed an algorithm that considers their expectations for each outcome. In this case, the analysts at the Economist have chosen to merge two axes (i.e. the number of Republican votes and the number of Democrat votes) together.
 
 ```{r, echo=FALSE, fig.fullwidth = TRUE}
 
@@ -386,70 +398,6 @@ There are many political science questions you could explore with posterior dist
 * Past: How many electoral votes would Hilary Clinton have won if she picked a different VP?
 * Present: What is the median height of Harvard students?
 * Future: How many electoral votes will a presidential candidate win?
-
-<!-- VZ: Do we still want this? I deleted the part about histograms-->
-
-Using our knowledge of PDFs and simulations, we can solve a problem.
-
-What are the odds of that the sum of two die will be seven? We could figure this out analytically, but a simulation in R is a easy way to predict and confirm our expected probability.
-
-We create a dice and set the number of simulations. Next, we build a tibble and filter for observations where the sum of the die equals 7.
-
-```{marginfigure}
-Note that we could have hard-coded the `sims` value into the tibble call in step 3 by 
-setting size = 10000. However, it is good practice to create a separate variable.
-This way, if we want to change the number of simulations, we do not need to 
-manually change all of our code.
-```
-
-```{r}
-
-dice <- c(1:6)
-
-sims <- 10000
-
-mydata <- tibble(dice_1 = sample(dice, size = sims, replace = TRUE),
-                 dice_2 = sample(dice, size = sims, replace = TRUE))
-
-count <- mydata %>%
-  filter((dice_1 + dice_2) %in% 7) %>%
-  count() %>%
-  pull(n)
-
-probability <- count/sims
-
-```
-
-
-In this simulation, we calculated a final probability of `r probability`. 
-
-To visualize the probability of different outcomes, we can build a histogram using the tibble we just created.
-
-First, we create a column in our tibble containing the sum of the two die that we rolled.
-
-```{r}
-
-mydata <- mydata %>%
-  mutate(sum = (dice_1 + dice_2))
-
-ggplot(mydata, aes(x = sum)) +
-  geom_histogram(aes(y=..count../sum(..count..)), binwidth = 1, 
-                 fill = "dark green", color = "white") +
-  labs(title = "Histogram Probability Distribution of Sum for Rolling 2 Die 10000 Times",
-       x = "Value of dice roll",
-       y = "Probability") +
-  scale_x_continuous(breaks = seq(0,12,1), labels = 0:12) +
-  theme_classic()
-
-```
-
-
-Similarly, we could create a more complicated simulation of the fall election
-and count the number of observations involving Trump's re-election. We could
-simulate different weather patterns and count the number of observations involving
-rain today.
-
-Takeaway: we want to simulate a scenario as many times as possible, then count the number of observations with the desired outcome.
 
 ## Tree Diagrams
 
@@ -550,12 +498,12 @@ This tree diagram illustrates exactly this. Starting from the left, we see that 
 
 Now the tree branches out.
 
-* *If* the random person has the disease, then we go down the top branch. The p(random person correctly tests positive) is 0.8 because the test is 80% sure of correctly returning positive when the person has the disease.
-* By the same logic, *if* the random person does not have the disease, we go down the bottom branch. The p(random person incorrectly tests positive) is 0.1.
+* *If* the random person has the disease, then we go down the top branch. The p(correctly testing positive) is 0.8 because the test is 80% sure of correctly returning positive when the person has the disease.
+* By the same logic, *if* the random person does not have the disease, we go down the bottom branch. The p(testing positive) is 0.1.
 
 We decide to go down the top branch *if* our random person has the disease. We go down the bottom branch *if* they do not. This is called **conditional probability**. The p(testing positive) is **dependent** on whether the person has the disease.
 
-How would you express this in statistical notation? P(A|B) is the same thing as p(A) *given* B. p(A|B) essentially means p(A) *if* we know for sure that B is true.
+How would you express this in statistical notation? p(A|B) is the same thing as p(A) *given* B. p(A|B) essentially means p(A) *if* we know for sure that B is true. You should also remember that p(A|B) is not the same thing as p(B|A).
 
 ```{marginfigure}
 **Positive:** The test results suggest that the patient has the disease.
@@ -660,7 +608,7 @@ text(340,150,"P(Positive | No Disease)",cex=.5)
 
 This concept of conditional probability is relevant in our everyday lives. For example, the probability of Trump's re-election might be different than the probability of Trump's re-election *given* that we are in a recession. The probability of you reading a textbook might vary, *depending* on the likelihood of your instructor cold-calling you in class. Whenever you encounter a question involving conditional probability, drawing a tree diagram is a very useful approach to visualization.
 
-<!-- EC: This could be a good section to include a disclaimer about not mixing up P(B|A) and P(A|B). Alternatively, could add more examples to the section below that mentions they are different, since it is mentioned in passing -->
+### Joint Probability
 
 ### Two Diagrams for One Set of Coin Flips
 
