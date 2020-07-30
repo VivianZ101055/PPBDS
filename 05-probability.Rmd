@@ -5,7 +5,9 @@ output_yaml:
 
 # Probability
 
-<!-- 1) The "p" in p() is always lower case. It is fine if p sometimes has subscripts, but be careful not to confuse students. Example $p_H$ could be used to refer to the probability of heads, which we can also write as p(H) or p(Heads). Note that there is a difference between p(H) and p(Coin).  The p(H) refers to a singel number, the probability of Heads, which must be a number between zero and one. The p(Coin) refers to the entire probability distribution, the probability of both Heads and of Coins. -->
+<!-- 1) The "p" in p() is always lower case. It is fine if p sometimes has subscripts, but be careful not to confuse students. Example $p_H$ could be used to refer to the probability of heads, which we can also write as p(H) or p(Heads). Note that there is a difference between p(H) and p(Coin).  The p(H) refers to a singel number, the probability of Heads, which must be a number between zero and one. The p(Coin) refers to the entire probability distribution, the probability of both Heads and of Coins. 
+
+done VZ (changed to small p, added a section at the start of the probability distribution section on the difference between p(H) and p(Coin)-->
 
 <!-- Add joint probability discussion in Tree part. That is, explain what p(A, B) is now that they understand p(A). Entire purpose of Tree section is to explain joint probability and conditional probability. That is, p(A, B) and p(A | B). -->
 
