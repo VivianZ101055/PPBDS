@@ -18,7 +18,7 @@ done VZ (changed to small p, added a section at the start of the probability dis
 
 <!-- A probability distribution is an object with a domain of outcomes, example: sum of two die. (You don't care which die has what value.) Another example, result of two die and you care which die came which way. Each element in the domain is *mapped* to a probability value, which is a number between 0 and 1 inclusive. The sum of all the mappings equals 1. -->
 
-<!-- Stick in the Maria video within the tree chapter. The conditional distribution is defined as a "slice" taken through the joint distribution at a specific value of B.  -->
+<!-- Stick in the Maria video within the tree chapter. The conditional distribution is defined as a "slicpre" taken through the joint distribution at a specific value of B.  -->
 
 <!-- Do you have disease on Y- axis instead. -->
 
