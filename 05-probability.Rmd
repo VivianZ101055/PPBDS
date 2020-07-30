@@ -12,7 +12,7 @@ done VZ (changed to small p, added a section at the start of the probability dis
 
 <!-- Add joint probability discussion in Tree part. That is, explain what p(A, B) is now that they understand p(A). Entire purpose of Tree section is to explain joint probability and conditional probability. That is, p(A, B) and p(A | B). -->
 
-<!-- Add ### in first section for Flipping a coin; Rolling two die, and  -->
+<!-- Add ### in first section for Flipping a coin; Rolling two die, and  done, VZ -->
 
 <!-- Add 4th subsubpart to first part explaining Joint Distributions. Example is one die with 50% likelihood of coming up 6 (and other faces at 10%) and second die 50% likelihood. Don't only care about the total. In this situation, you need a 3d plot. p(A, B) is p(Result of Die 1, Result of Die 2). Just one empirical plot of 100 roles. -->
 
@@ -39,7 +39,7 @@ done VZ (changed to small p, added a section at the start of the probability dis
 
 <!-- DK: It is clear that the concept of a posterior is tricky. So, after each of our three examples, we need to discuss what the posterior means. Recall: The posterior is our belief about the future. The two most common ways to think about this: First, what will the next roll of the dice bring? Most likely outcome is a 2. But there is a 15% chance of a 3. There is a 5% chance of a 7 or an 11. And so on. Second, what would the empirical distribution look like if we rolled the dice 10,000 times. Again, these are the same things, almost by definition. But they are different conceptions, both of which you should explain each time. -->
 
-<!-- Zoom with Tahmid and make sure that he understands the posterior distribution and that you agree with how he describes the posterior distribution in chapter 7. Will students understand his description, even though the last time they thought about this was two weeks earlier in your chapter. -->
+<!-- Zoom with Tahmid and make sure that he understands the posterior distribution and that you agree with how he describes the posterior distribution in chapter 7. Will students understand his description, even though the last time they thought about this was two weeks earlier in your chapter. - done VZ -->
 
 <!-- mean income  p(MI), P(MI), pd(MI) or pdf(MI).   Start with p(models, data you might see) before you see the data, but after you know the experiment you are planning to do. Then, you see the data. Cool! p(models | data = what you saw) == p(models | data) -->
 
@@ -608,8 +608,6 @@ text(340,150,"P(Positive | No Disease)",cex=.5)
 
 This concept of conditional probability is relevant in our everyday lives. For example, the probability of Trump's re-election might be different than the probability of Trump's re-election *given* that we are in a recession. The probability of you reading a textbook might vary, *depending* on the likelihood of your instructor cold-calling you in class. Whenever you encounter a question involving conditional probability, drawing a tree diagram is a very useful approach to visualization.
 
-### Joint Probability
-
 ### Two Diagrams for One Set of Coin Flips
 
 In our histogram probability distribution, we didn't care what combinations of numbers made each sum. We only cared about the outcome. There are two ways of thinking about a coin toss as well. Your tree diagram should look different depending on whether the order of the results matters.
@@ -747,15 +745,29 @@ plot(rEG, edgeAttrs=eAttrs, attrs=attributes)
 
 ```
 
-<!-- # Section 2: Trees as a formal structure for probability -->
+### Joint Probability
 
-<!-- 2 a) Describe trees. Show some diagrams. (Maybe save making these for later? Are their R packages for this?) This is the basic structure which we will use for everything in the chapter. We can make trees for the examples above. We can discuss important statistical concepts: like conditional probability, marginal probability in the context of a tree. We can highlight subtle cases: Like throw two dice together versus throw one dice and then a second dice. These make for different tree structures, but the same set of leaves. Show an unbalanced tree, in which one branch is a different length, like a craps game or maybe blackjack. Again, no mathematical formalism. Also, no Bayesian stuff. We are just taking the same examples from above and making them a little more structured.  -->
+Now that we understand both p(A) and p(A|B), let's talk about what it means to calculate p(A, B).
 
-<!--https://github.com/YuLab-SMU/treedata-book is useful for tree diagrams-->
+Let's say that you are rolling two six-sided die simultaneously. One is weighted so that there is a 50% chance of rolling a 6 and a 10% chance of each of the other values. The other is weighted so there is a 50% chance of rolling a 5 and a 10% chance of rolling each of the other values. Let's roll both die 1000 times. If we were to visualize this, it would look different because the domain is a plane instead of a line.
 
-<!-- Discuss conditional probability and marginal probability using a simple tree with 0.6/0.4 first branch, and then next branches slightly different: 0.8/0.2 and 0.1/0.9. -->
+<!-- Why isn't the sum of the percent column equal to 1 -->
 
-<!-- We a tree, we can explain total probability, conditional probability and marginal probabity. Explain the meaning of p(A, B), p(A), p(B) and p(B|A). But that is it. Nothing more mathematical than that. Focus on words, directly connected to the tree images. -->
+```{r, echo=FALSE}
+
+mydata <- tibble(die.1 = sample(1:6, size = 1000, prob =
+                                  c(0.1,0.1,0.1,0.1,0.1,0.5), replace = TRUE),
+                 die.2 = sample(1:6, size = 1000, prob =
+                                  c(0.1,0.1,0.1,0.1,0.5,0.1), replace = TRUE)) %>%
+  group_by(die.1, die.2) %>%
+  summarize(total = n(), .group = "drop") %>%
+  mutate(probability = total/sum(total))
+
+mydata
+
+```
+The fact that we're talking about joint distributions where we roll two die doesn't change the meaning of a probability distribution. As you can see through the tibble, the sum of the probabilities of all the outcomes is 1.
+
 
 <!-- 2 b) Another coding session, but this time with list-columns and map_functions. These do not have to be long. We just want to re-iterate the points we made in words. Maybe we don't need list-columns. Maybe just show map functions here. Again, the point of this section is ONLY to understand the key probabity concepts: joint, total, conditional and marginal. -->
 
