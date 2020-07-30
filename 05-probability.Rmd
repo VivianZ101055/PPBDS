@@ -246,7 +246,7 @@ ggplot(mydata, aes(x = results)) +
 
 Now we are rolling two die.
 
-Our *mathematical distribution* tells us that, with a fair dice, p(1), p(2), p(3), p(4), p(5), and p(6) are equal: there is a 1/6 chance of each. When we roll two die at the same time and sum the values, the numbers closes to the middle (ex. 6, 7, 8) are more common sums than numbers at the very edge (ex. 2, 12) because there are more combinations of numbers that add up to the middle values.
+Our *mathematical distribution* tells us that, with a fair dice, the probability of getting 1, 2, 3, 4, 5, and 6 are equal: there is a 1/6 chance of each. When we roll two die at the same time and sum the values, the numbers closes to the middle (ex. 6, 7, 8) are more common sums than numbers at the very edge (ex. 2, 12) because there are more combinations of numbers that add up to the middle values.
 
 ```{r, echo=FALSE}
 
