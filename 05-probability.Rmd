@@ -798,14 +798,6 @@ Now that we understand trees, we can do some Bayes' Theorem examples by hand. We
 
 <!-- 3 b) Code up a full featured simulation exercise, like the cookie problem but with more complexity. See the old 1005 problem set. Connect this to how 538 does things. 99.99% of real world problems are solved with simulation, not analytically. -->
 
-<!-- This prediction by 538 is really interesting: (https://projects.fivethirtyeight.com/2020-march-madness-predictions/), especially
-pre-game. Is this what you mean by how 538 does things? Potentially link something
-like this into the textbook to illustrate how simulations are used?  webshot() -->
-
-<!-- Do we like all the words below? I am not sure. -->
-
-<!-- adding my own version of this - looking for feedback IB -->
-
 Imagine you wake up one morning and feel a little bit under the weather. Not sick, just not 100%.
 So, you go to your doctor and your doctor is confused. So, she runs a slew of tests and in a couple of days, one of them comes back positive. You've tested positive for a rare disease, called $X$. Only *.1%* of the population has this disease. And the test correctly identifies you as positive *99%* of the time!
 
@@ -861,6 +853,42 @@ Now, let's switch back to proportion-based probabilities and think about it. Jus
 
 
 ## Comparing Three Models
+
+Now, imagine that your friend gives you a bag with two marbles. There could either be two white marbles, two black marbles, or one of each color. We can formalize this by setting three different values of p, where p represents the proportion of white marbles. The bag could contain 0% white marbles, 50% white marbles, or 100% white marbles. Therefore, p could only be 0, 0.5, or 1. If you take a marble out of the bag, would it be black or white? Let's make what we call a Bayes scatterplot out of this.
+
+<!-- Could we talk about what this scatterplot should look like? -->
+
+```{r, echo=FALSE}
+
+all_white <- tibble(
+  results = c(rep(2, 1000)),
+  model = c(rep(1, 1000)))
+
+all_black <- tibble(
+  results = c(rep(0, 1000)),
+  model = c(rep(0, 1000))
+)
+
+mixed_bw <- tibble(
+  results = sample(0:1, size = 1000, prob = c(0.5, 0.5), replace = TRUE),
+  model = c(rep(0.5, 1000))
+)
+
+# all_marbles <- merge(all_white, all_black, all.x = TRUE, all.y = TRUE) %>%
+#   merge(mixed_bw, all.x = TRUE, all.y = TRUE)
+# 
+# ggplot(all_marbles, aes(x = results, y = model)) + 
+#   geom_point() +
+#   geom_jitter(alpha = 0.4) +
+#   labs(
+#     title = "Sampling Distributions of Bags of Margles",
+#     subtitle = "Taking a Marble out of the Bag",
+#     x = "Number of White Marbles",
+#     y = "Proportion of White Marbles in the Bag"
+#   )
+
+```
+
 
 <!-- # Section 4: Three Models (use the the Two Marble Example) and Scatterplots -->
 
@@ -929,7 +957,6 @@ school_b <- tibble(
 
 ggplot(school_b, aes(x = prop_yes)) + 
   geom_histogram(binwidth = .01) + 
-  theme_tufte() + 
   labs(
     title = "Sampling Distribution from High School B", 
     subtitle = "1000 samples of 20 students taken",
@@ -969,7 +996,7 @@ school_j <- tibble(
 
 ggplot(school_j, aes(x = prop_yes)) + 
   geom_histogram(binwidth = .01) + 
-  theme_tufte() + 
+  # theme_tufte() + 
   labs(
     title = "Sampling Distribution from High School J", 
     subtitle = "1000 samples of 20 students taken",
@@ -1078,7 +1105,7 @@ all_school <- merge(school_b, school_c, all.x = TRUE, all.y = TRUE) %>%
 ggplot(all_school, aes(x = prop_yes, y = school_prop)) + 
   geom_point() +
   geom_jitter(alpha = .2) +
-  theme_tufte() + 
+  # theme_tufte() + 
   labs(
     title = "Sampling Distributions of Different Proportion High Schools",
     subtitle = "1000 Samples Taken per High School (Population Proportion Level)",
