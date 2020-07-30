@@ -215,7 +215,7 @@ ggplot(mydata, aes(x = results)) +
 
 Now we are rolling two die.
 
-Our *mathematical distribution* tells us that, with a fair dice, the probability of getting 1, 2, 3, 4, 5, and 6 are equal: there is a 1/6 chance of each. When we roll two die at the same time and sum the values, the numbers closes to the middle (ex. 6, 7, 8) are more common sums than numbers at the very edge (ex. 2, 12) because there are more combinations of numbers that add up to the middle values.
+Our *mathematical distribution* tells us that, with a fair dice, p(1), p(2), p(3), p(4), p(5), and p(6) are equal: there is a 1/6 chance of each. When we roll two die at the same time and sum the values, the numbers closes to the middle (ex. 6, 7, 8) are more common sums than numbers at the very edge (ex. 2, 12) because there are more combinations of numbers that add up to the middle values.
 
 ```{r, echo=FALSE}
 
@@ -424,14 +424,14 @@ Takeaway: we want to simulate a scenario as many times as possible, then count t
 
 ### Independence
 
-So far, you have learned how to calculate P(A), which is the fancy, statistical way of saying the probability of an event. When flipping a coin, the probability of getting heads was 1/2. You have also learned how to compute the P(A or B). This means the probability of either A or B happening. When rolling a dice, P(1 or 2)--the probability of getting a 1 or a 2--was 1/3.
+So far, you have learned how to calculate p(A), which is the fancy, statistical way of saying the probability of an event. When flipping a coin, the probability of getting heads was 1/2. You have also learned how to compute the p(A or B). This means the probability of either A or B happening. When rolling a dice, p(1 or 2)--the probability of getting a 1 or a 2--was 1/3.
 
 What if you flipped 2 coins? You know that the probability of getting heads once is 1/2, but what are the odds of getting heads 2 times in a row? Let's take a look at this tree diagram. We read this diagram from left to right. On the left, the probability of getting heads is 0.5. Now the tree branches out.
 
-* *If* we got heads the first time, then we go up the top branch. The probability of getting heads again is 0.5.
-* *If* we got tails the first time, then we go down the bottom branch. The probability of getting heads is 0.5.
+* *If* we got heads the first time, then we go up the top branch. The p(heads) again is 0.5.
+* *If* we got tails the first time, then we go down the bottom branch. The p(heads) is 0.5.
 
-Notice how regardless of what we get the first time we flip the coin, the probability of getting heads is 0.5 throughout. This suggests that the coin flips are **independent**. The result of one coin flip does not impact the likelihood of getting the same result next time. Take a look at the tree diagram. P(H given H) represents the probability of getting heads *given* that we got heads the first time. P(H given T) represents the probability of getting heads *given* that we got tails the first time. P(H given H) = P(H given T).
+Notice how regardless of what we get the first time we flip the coin, the probability of getting heads is 0.5 throughout. This suggests that the coin flips are **independent**. The result of one coin flip does not impact the likelihood of getting the same result next time. Take a look at the tree diagram. p(heads given tails) represents the probability of getting heads *given* that we got heads the first time. p(heads given tails) represents the probability of getting heads *given* that we got tails the first time. p(heads given heads) = p(heads given tails).
 
 ```{r, echo=FALSE}
 
@@ -515,16 +515,16 @@ plot(rEG, edgeAttrs=eAttrs, attrs=attributes)
 
 Now imagine that 60% of people in a community have a disease. A doctor develops a test to determine if a random person has the disease. However, this test isn't 100% accurate. This test is 80% sure of correctly returning positive **if the person has the disease** and 90% sure of correctly returning negative **if the person does not have the disease**.
 
-This tree diagram illustrates exactly this. Starting from the left, we see that the probability of a random person having the disease is 0.6. Since they either have the disease or don't (those are the only two possibilities), the probability that they don't have the disease is 1 - 0.4.
+This tree diagram illustrates exactly this. Starting from the left, we see that p(random person has the disease) is 0.6. Since they either have the disease or don't (those are the only two possibilities), p(random person does not have the disease) is 1 - 0.4.
 
 Now the tree branches out.
 
-* *If* the random person has the disease, then we go down the top branch. The probability of the person testing positive is 0.8 because the test is 80% sure of correctly returning positive when the person has the disease.
-* By the same logic, *if* the random person does not have the disease, we go down the bottom branch. The probability of the person incorrectly testing positive is 0.1.
+* *If* the random person has the disease, then we go down the top branch. The p(random person correctly tests positive) is 0.8 because the test is 80% sure of correctly returning positive when the person has the disease.
+* By the same logic, *if* the random person does not have the disease, we go down the bottom branch. The p(random person incorrectly tests positive) is 0.1.
 
-We decide to go down the top branch *if* our random person has the disease. We go down the bottom branch *if* they do not. This is called **conditional probability**. The probability of testing positive is **dependent** on whether the person has the disease.
+We decide to go down the top branch *if* our random person has the disease. We go down the bottom branch *if* they do not. This is called **conditional probability**. The p(testing positive) is **dependent** on whether the person has the disease.
 
-How would you express this in statistical notation? P(A|B) is the same thing as the probability of A *given* B. P(A|B) essentially means the probability of A *if* we know for sure that B is true.
+How would you express this in statistical notation? P(A|B) is the same thing as p(A) *given* B. p(A|B) essentially means p(A) *if* we know for sure that B is true.
 
 ```{marginfigure}
 **Positive:** The test results suggest that the patient has the disease.
