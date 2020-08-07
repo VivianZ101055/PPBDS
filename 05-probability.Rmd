@@ -97,7 +97,7 @@ DK: If we want to do rethinking: https://bookdown.org/content/3890/small-worlds-
 
 library(scales)
 library(ggthemes)
-# library(Rgraphviz)
+library(Rgraphviz)
 library(tufte)
 library(dagitty)
 library(tidyverse)
