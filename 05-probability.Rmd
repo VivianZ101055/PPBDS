@@ -390,20 +390,65 @@ Let's say that you are rolling two six-sided die simultaneously. One is weighted
 
 <!-- Add 4th subsubpart to first part explaining Joint Distributions. Do this at the end of probability distribution part.  Example is one die with 50% likelihood of coming up 6 (and other faces at 10%) and second die 50% likelihood. Don't only care about the total. In this situation, you need a 3d plot. p(A, B) is p(Result of Die 1, Result of Die 2). Just one empirical plot of 100 roles. -->
 
-If we were to visualize this, it would look different because the domain is a plane instead of a line.
-
 ```{r, echo=FALSE}
 
 mydata <- tibble(die.1 = sample(1:6, size = 1000, prob =
                                   c(0.1,0.1,0.1,0.1,0.1,0.5), replace = TRUE),
                  die.2 = sample(1:6, size = 1000, prob =
-                                  c(0.1,0.1,0.1,0.1,0.5,0.1), replace = TRUE)) %>%
-  group_by(die.1, die.2) %>%
-  summarize(total = n()) %>%
-  ungroup() %>%
-  mutate(probability = total/sum(total))
+                                  c(0.1,0.1,0.1,0.1,0.5,0.1), replace = TRUE))
 
-mydata
+joint_distribution <- ggplot(mydata, aes(x = die.1, y = die.2, alpha = 0.01)) +
+  geom_jitter(color = "black")
+
+saveGIF(
+  expr = {
+    
+    # ggplot of bayes plot
+    
+    plot(joint_distribution)
+    
+    # blue hist3d from above
+    
+    hist3D(z = z_factor, border = "black",
+       curtain = F, 
+       col = "blue",
+       theta = 0, phi = 90,
+       space = .25)
+    
+    # hist3d from above colored by model
+    
+    hist3D(z = z_factor, border = "black",
+       curtain = F, 
+       colvar = colvar,col = jet.col(21),
+       theta = 0, phi = 90,
+       space = .25,
+       colkey = FALSE)
+
+    
+  },
+  
+    # change the interval between the images. Default is 1 I believe
+  
+  interval = 1,
+  
+  # name the gif. You can change where it goes by putting the file path before
+  # it. E.g. "./folder/3d_hist_1.gf" where the "." is a stand in for the current
+  # directory. This would create a gif called "3d_hist_1.gf" and put it inside a
+  # folder called "folder" in the current directory. The folder must already
+  # exist.
+  
+  movie.name = "joint_distribution.gif"
+)
+
+
+bayes_scatter_2 <- ggplot(x, aes(result, mod, alpha = 0.01)) +
+  geom_jitter(color = "black") +
+  labs(x = "Data",
+       y = "Model") +
+  theme_bw() +
+  theme(legend.position = "none",
+        plot.margin = unit(c(2.1, 2.1, 2.1, 2.1), "cm")) #top, right, bottom, left
+
 
 ```
 
