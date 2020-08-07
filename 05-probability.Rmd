@@ -308,15 +308,9 @@ Now we let's say we are building probability distributions for political events,
 
 It would be incredibly naive to create the following *mathematical distribution*. We create a distribution by running a simulation 10,000 times, where the chances of the Democrats winning any given electoral vote is 0.5.
 
-<<<<<<< HEAD
 
 ```{r}
 
-=======
-
-```{r}
-
->>>>>>> master
 ev <- c(rep(3, 8), rep(4, 5), rep(5, 3), rep(6, 6), rep(7, 3), rep(8,2),
         rep(9, 3), rep(10, 4), rep(11, 4), 12, 13, 14, 15, rep(16, 2), 18, 20 , 20, 19, 29, 38, 55)
 
