@@ -326,6 +326,7 @@ ggplot(mydata, aes(x = results)) +
   theme_classic()
 
 ```
+
 ### Presidential Elections
 
 Now we let's say we are building probability distributions for political events, like a presidential election. We want to know p(Candidate A wins the election).
@@ -383,6 +384,32 @@ There are many political science questions you could explore with posterior dist
 * Future: How many electoral votes will a presidential candidate win?
 
 <!-- We need a continuous distribution. -->
+
+<!-- Add 4th subsubpart to first part explaining Joint Distributions. Do this at the end of probability distribution part.  Example is one die with 50% likelihood of coming up 6 (and other faces at 10%) and second die 50% likelihood. Don't only care about the total. In this situation, you need a 3d plot. p(A, B) is p(Result of Die 1, Result of Die 2). Just one empirical plot of 100 roles. -->
+
+### Joint Distributions
+
+Now we understand that p(A) can represent the probability distribution of outcomes for event A. Let's talk about joint distributions, which can be represented by p(A, B). Joint distributions are also mathematical objects that cover a set of outcomes, where each distinct outcome has a chance of occurring between 0 and 1 and the sum of all chances equals to 1. The key to a joint distribution is it measures the chance that both events A and B will occur simultaneously.
+
+Let's say that you are rolling two six-sided die simultaneously. One is weighted so that there is a 50% chance of rolling a 6 and a 10% chance of each of the other values. The other is weighted so there is a 50% chance of rolling a 5 and a 10% chance of rolling each of the other values. Let's roll both die 1000 times. In previous examples involving two die, we cared about the sum of results and not the outcomes of the first versus the second rolls of each simulation. With a joint distributions, the order matters so instead of 11 possible outcomes on the x-axis of our distribution graph (ranging from 2 to 12), we have 36. Furthermore, a 2D probability distribution is not sufficient to represent all of the variables involved, so the joint distribution for this example should be displayed using a 3D plot.
+
+```{r, echo=FALSE}
+mydata <- tibble(die.1 = sample(1:6, size = 1000, prob =
+                                  c(0.1,0.1,0.1,0.1,0.1,0.5), replace = TRUE),
+                 die.2 = sample(1:6, size = 1000, prob =
+                                  c(0.1,0.1,0.1,0.1,0.5,0.1), replace = TRUE)) %>%
+  group_by(die.1, die.2) %>%
+  summarize(total = n()) %>%
+  ungroup() %>%
+  mutate(probability = total/sum(total))
+mydata
+```
+
+The fact that we're talking about joint distributions where we roll two die doesn't change the meaning of a probability distribution. As you can see through the tibble, the sum of the probabilities of all the outcomes is 1.
+
+```{r}
+sum(mydata$probability)
+```
 
 ## Tree Diagrams
 
