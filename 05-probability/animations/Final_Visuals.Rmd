@@ -87,8 +87,6 @@ z_factor <- table(result_factor, mod_factor)
 
 z_factor[z_factor == "0"] <- NA
 
-z_factor <- as.factor(mydata$total)
-
 
 ```
 
@@ -302,7 +300,7 @@ saveGIF(
     # blue hist3d from above
     
     hist3D(z = z_factor, border = "black",
-       curtain = F, 
+       # curtain = F, 
        col = "blue",
        theta = 0, phi = 90,
        space = .25)
@@ -310,7 +308,7 @@ saveGIF(
     # hist3d from above colored by model
     
     hist3D(z = z_factor, border = "black",
-       curtain = F, 
+       # curtain = F, 
        colvar = colvar,col = jet.col(21),
        theta = 0, phi = 90,
        space = .25,

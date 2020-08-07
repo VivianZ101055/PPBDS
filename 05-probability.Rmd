@@ -395,7 +395,9 @@ Let's say that you are rolling two six-sided die simultaneously. One is weighted
 mydata <- tibble(die.1 = sample(1:6, size = 1000, prob =
                                   c(0.1,0.1,0.1,0.1,0.1,0.5), replace = TRUE),
                  die.2 = sample(1:6, size = 1000, prob =
-                                  c(0.1,0.1,0.1,0.1,0.5,0.1), replace = TRUE)) %>%
+                                  c(0.1,0.1,0.1,0.1,0.5,0.1), replace = TRUE))
+
+%>%
   group_by(die.1, die.2) %>%
   summarize(total = n()) %>%
   ungroup() %>%
