@@ -11,21 +11,7 @@ output_yaml:
 
 <!-- 4) Define the mathematical distribution of electoral college votes as the distribution which results from running the following calculation 10,000 times. Take the vector ev of electoral college votes, which is an integer vector of length 51. (Use the current value, don't worry about the past.) Multiple this vector, element-by-element, with `rbinom(length(ev), size = 1, p = 0.5)`. Sum the resulting vector. Code:  `ev %*% rbinom(length(ev), size = 1, p = 0.5)` Doing this once gives you the total electoral votes for the Democrat in that one simulation. Done VZ-->
 
-```{r}
-# ev <- c(12, 23, 2, 4, 25, 3, 34, 12, 26, 34)
-# sims <- 10000
-# 
-# result <- tibble(total = (matrix(rbinom(sims*length(ev), 
-#                         size = 1, p = 0.5), 
-#                  ncol = length(ev)) %*% ev)[,1])
-# 
-# ggplot(data = result, aes(total)) +
-#   geom_histogram(binwidth = 1)
-  
-```
-
-
-<!-- Add 4th subsubpart to first part explaining Joint Distributions. Do this at the end of probability distribution part.  Example is one die with 50% likelihood of coming up 6 (and other faces at 10%) and second die 50% likelihood. Don't only care about the total. In this situation, you need a 3d plot. p(A, B) is p(Result of Die 1, Result of Die 2). Just one empirical plot of 100 roles. -->
+<!-- Add 4th subsubpart to first part explaining Joint Distributions. Do this at the end of probability distribution part.  Example is one die with 50% likelihood of coming up 6 (and other faces at 10%) and second die 50% likelihood. Don't only care about the total. In this situation, you need a 3d plot. p(A, B) is p(Result of Die 1, Result of Die 2). Just one empirical plot of 100 roles. Almost done, making 3D graph right now VZ -->
 
 <!-- A probability distribution is an object with a domain of outcomes, example: sum of two die. (You don't care which die has what value.) Another example, result of two die and you care which die came which way. Each element in the domain is *mapped* to a probability value, which is a number between 0 and 1 inclusive. The sum of all the mappings equals 1. -->
 
@@ -313,27 +299,27 @@ ggplot(mydata, aes(x = results)) +
 
 ### Presidential Elections
 
-Now we let's say we are building probability distributions for political events, like a presidential election. We want to know p(Candidate A wins the election).
+Now we let's say we are building probability distributions for political events, like a presidential election. We want to know p(Democrats win x electoral votes), where x represents the range of possible outcomes from 0 to 538.
 
-It would be incredibly naive to create the following *mathematical distribution*.
+It would be incredibly naive to create the following *mathematical distribution*. We create a distribution by running a simulation 10,000 times, where the chances of the Democrats winning any given electoral vote is 0.5.
 
-```{r, echo = FALSE}
+```{r}
+ev <- c(rep(3, 8), rep(4, 5), rep(5, 3), rep(6, 6), rep(7, 3), rep(8,2),
+        rep(9, 3), rep(10, 4), rep(11, 4), 12, 13, 14, 15, rep(16, 2), 18, 20 , 20, 19, 29, 38, 55)
 
-# Flipping one coin 100 times
+sims <- 10000
 
-mydata <- tibble(results = c(rep(0, 50),
-                             rep(1, 50)))
-
-ggplot(mydata, aes(x = results)) +
-  geom_histogram(aes(y=..count../sum(..count..)), binwidth = 0.5, 
-                 fill = "dark gray", color = "white") +
+result <- tibble(total = (matrix(rbinom(sims*length(ev),
+                        size = 1, p = 0.5),
+                 ncol = length(ev)) %*% ev)[,1])
+ggplot(data = result, aes(total)) +
+  geom_histogram(binwidth = 1) +
   labs(title = "Mathematical Probability Distribution",
-       subtitle = "Probability of Parties Winning",
-       x = "Outcomes",
-       y = "Probability") +
-  scale_x_continuous(breaks = seq(0,1,1), labels = c("Republicans", "Democrats"))
-
+       y = "Number of Simulations (Count)",
+       x = "Total of Electoral Votes for Democrats") +
+  theme_classic()
 ```
+
 We know that campaign platforms, donations, charisma, and many other factors will contribute to a candidate's likeability. Elections are more complicated than coin tosses. Some polticial scientists may try to create algorithms to calculate mathematical probability distributions.
 
 The *empirical distribution* in this case could involve looking into past elections in the United States and counting the number of elections that each party has won. Perhaps we're interested specifically in the electoral votes that the Democrats receive. For the empirical distribution, we would create a tibble from past elections. Looking at elections since 1964, we can observe that the number of electoral votes that the Democrats received in each one is different. Given that we only have 14 entries, it is difficult to draw conclusions or make predictions based off of this empirical distribution.
