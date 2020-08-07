@@ -72,8 +72,25 @@ bayes_scatter <- ggplot(x, aes(result, mod, alpha = 0.01)) +
 ##  Make the mod and result values factors so they will each be in their own
 ##  "box" and not continuous
 
-result_factor <- as.factor(mydata$die.1)
-mod_factor <- as.factor(mydata$die.2)
+result_factor <- as.factor(mydata$number_die1)
+mod_factor <- as.factor(mydata$number_die2)
+
+# create a table of result_factor and mod_factor data. table() builds a
+# contingency table of the counts at each combination of factor levels needed to
+# be able to plot using hist3D()
+
+z_factor <- table(result_factor, mod_factor)
+
+# assign NA values to all groups with 0 -> this will make it so that the "boxes"
+# corresponding to these value combos in the 3d plot are blank/white space and
+# not colored
+
+z_factor[z_factor == "0"] <- NA
+
+##################
+
+result_factor <- as.factor(x$rep)
+mod_factor <- as.factor(x$mod)
 
 # create a table of result_factor and mod_factor data. table() builds a
 # contingency table of the counts at each combination of factor levels needed to
@@ -300,7 +317,7 @@ saveGIF(
     # blue hist3d from above
     
     hist3D(z = z_factor, border = "black",
-       # curtain = F, 
+       curtain = F, 
        col = "blue",
        theta = 0, phi = 90,
        space = .25)
@@ -308,7 +325,7 @@ saveGIF(
     # hist3d from above colored by model
     
     hist3D(z = z_factor, border = "black",
-       # curtain = F, 
+       curtain = F, 
        colvar = colvar,col = jet.col(21),
        theta = 0, phi = 90,
        space = .25,

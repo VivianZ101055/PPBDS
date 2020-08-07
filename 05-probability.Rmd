@@ -397,27 +397,44 @@ mydata <- tibble(die.1 = sample(1:6, size = 1000, prob =
                  die.2 = sample(1:6, size = 1000, prob =
                                   c(0.1,0.1,0.1,0.1,0.5,0.1), replace = TRUE))
 
-%>%
+count_1 <- mydata %>%
+  group_by(die.1) %>%
+  summarize(number_die1 = n()) %>%
+  select(number_die1)
+
+count_2 <- mydata %>%
+  group_by(die.2) %>%
+  summarize(number_die2 = n()) %>%
+  select(number_die2)
+
+otherdata <- mydata %>%
   group_by(die.1, die.2) %>%
   summarize(total = n()) %>%
-  ungroup() %>%
-  mutate(probability = total/sum(total))
+  select(total)
 
+mydata <- merge(mydata, otherdata)
+mydata <- merge(mydata, count_1)
+mydata <- merge(mydata, count_2)
 
-joint_distribution <- ggplot(mydata, aes(x = die.1, y = die.2)) +
-  geom_jitter(alpha = 0.3)
-
-%>%
-  group_by(die.1, die.2) %>%
-  summarize(total = n()) %>%
-  ungroup() %>%
-  mutate(probability = total/sum(total))
-
-bayes_scatter <- ggplot(mydata, aes(x = die.1, y = die.2)) +
-  geom_point() +
-  geom_jitter()
-
-mydata
+# mydata$die.1
+# 
+# hist3D(x = mydata$number_die1, y = mydata$number_die2, z = z_factor)
+# 
+# 
+# joint_distribution <- ggplot(mydata, aes(x = die.1, y = die.2)) +
+#   geom_jitter(alpha = 0.3)
+# 
+# %>%
+#   group_by(die.1, die.2) %>%
+#   summarize(total = n()) %>%
+#   ungroup() %>%
+#   mutate(probability = total/sum(total))
+# 
+# bayes_scatter <- ggplot(mydata, aes(x = die.1, y = die.2)) +
+#   geom_point() +
+#   geom_jitter()
+# 
+# mydata
 
 ```
 
