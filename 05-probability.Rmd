@@ -7,7 +7,7 @@ output_yaml:
 
 <!-- 1) No orphan parantheses. Meaning no ) by itself and no ( with nothing after. - Done VZ-->
 
-<!-- 2) "Do you have disease?" on Y- axis instead. The data here is: What does your test show? The two models are: You have the disease and you don't have the disease. -->
+<!-- 2) "Do you have disease?" on Y- axis instead. The data here is: What does your test show? The two models are: You have the disease and you don't have the disease. Done VZ-->
 
 <!-- 3) Maybe switch the graph making package to [daggity](https://CRAN.R-project.org/package=dagitty)? I think that dagitty() would do the same as your package. I hate having to install a bioconductor package.  -->
 
@@ -751,6 +751,8 @@ sum(mydata$probability)
 
 ## Two Models
 
+"Do you have disease?" on Y- axis instead. The data here is: What does your test show? The two models are: You have the disease and you don't have the disease. -->
+
 <!-- # Section 3: Two Models, Scatterplots and Bayes Theorem -->
 
 <!-- 3 a) Key point of this section is how we deal with the simplest possible situation. There are only two possibilities. Either you have the disease, or you don't. Walk through this problem with counts first. There are 100,000 people in the country. (Top of tree.) 0.1% have the disease, which is 100 people. 999,900 do not. (These are the two branches from the top.) We give the test to all 100,000 people. And so on. We have the four leaves, and then we just add the two branches which positive test results together, and then divide that into the total with the disease who tested positive. Presto! Your true odds.
@@ -802,8 +804,8 @@ ggplot(pop, aes(x = as.factor(have_disease), y = as.factor(tested_positive))) +
   geom_jitter(alpha = .4) +
   theme_classic() +
   labs(title = "Distribution of Disease Results in a Population of 10000",
-    x = "Do you have the disease?",
-    y = "Did you test positive?")
+    x = "Did you test positive?",
+    y = "Do you have the disease?")
 
 ```
 
