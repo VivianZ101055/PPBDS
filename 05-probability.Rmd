@@ -323,9 +323,11 @@ ggplot(data = result, aes(total)) +
 
 ```
 
-We know that campaign platforms, donations, charisma, and many other factors will contribute to a candidate's likeability. Elections are more complicated than coin tosses. Some polticial scientists may try to create algorithms to calculate mathematical probability distributions.
+We know that campaign platforms, donations, charisma, and many other factors will contribute to a candidate's likeability. Elections are more complicated than coin tosses. Some political scientists may try to create algorithms to calculate mathematical probability distributions.
 
-The *empirical distribution* in this case could involve looking into past elections in the United States and counting the number of elections that each party has won. Perhaps we're interested specifically in the electoral votes that the Democrats receive. For the empirical distribution, we would create a tibble from past elections. Looking at elections since 1964, we can observe that the number of electoral votes that the Democrats received in each one is different. Given that we only have 14 entries, it is difficult to draw conclusions or make predictions based off of this empirical distribution.
+The *empirical distribution* in this case could involve looking into past elections in the United States and counting the number of electoral votes that the Democrats won in each. For the empirical distribution, we create a tibble with electoral vote results from past elections. Looking at elections since 1964, we can observe that the number of electoral votes that the Democrats received in each one is different. Given that we only have 14 entries, it is difficult to draw conclusions or make predictions based off of this empirical distribution.
+
+However, this model is enough to suggest that the assumptions of the mathematical probability distribution above do not work for electoral votes. The model assumes that the Democrats have a 50% chance of receiving each of the 538 votes. Just looking at the mathematical probability distribution, we can observe that receiving 13 or 17 or 486 votes out of 538 would be extreme and almost impossible under this mathematical model. However, our empirical distribution tells us that those were real election results.
 
 ```{r, echo = FALSE}
 
