@@ -11,9 +11,9 @@ output_yaml:
 
 <!-- DK: Update. I think that either plotly (https://plotly.com/r/3d-surface-plots/) or rayshader (https://www.rayshader.com/#3d-plotting-with-rayshader-and-ggplot2) is the way to go. These are the future of 3d plots in R, not plot3D. -->
 
-<!-- 1b) Add a section called "Unnormalized distributions" just before "Joint distributions" in the first part. These are just probability distributions with raw counts. In other words, they are not actual probability distributions (since the sum of the values is not 1) but they are easy to turn into probability distributions by dividing all the outcome counts by the sum of all outcome counts. They are handy because, sometimes, you don't want to bother to normalize everything until the end. -->
+<!-- 1b) Add a section called "Unnormalized distributions" just before "Joint distributions" in the first part. These are just probability distributions with raw counts. In other words, they are not actual probability distributions (since the sum of the values is not 1) but they are easy to turn into probability distributions by dividing all the outcome counts by the sum of all outcome counts. They are handy because, sometimes, you don't want to bother to normalize everything until the end. - done VZ-->
 
-<!-- 2) Make this point more often: A probability distribution is an object with a domain of outcomes, example: sum of two die. (You don't care which die has what value.) Another example, result of two die and you care which die came which way. Each element in the domain is *mapped* to a probability value, which is a number between 0 and 1 inclusive. The sum of all the mappings equals 1. -->
+<!-- 2) Make this point more often: A probability distribution is an object with a domain of outcomes, example: sum of two die. (You don't care which die has what value.) Another example, result of two die and you care which die came which way. Each element in the domain is *mapped* to a probability value, which is a number between 0 and 1 inclusive. The sum of all the mappings equals 1. - done VZ -->
 
 <!-- 3) Adding three model example. Situation is that there is a bag with two marbles: either both white, both black or one of each. Those are the three models. Then, you take (and then replace) one marble three times. Possible values you can get: three blacks, two blacks, one black, zero blacks. So, we have three models and four possible experimental results. This is the bridge between the simple Bayes example with two models (disease or no) and two possible experiment results (positibe test or negative test) and the N model example. -->
 
@@ -123,7 +123,7 @@ This allows us to make the following statements:
 
 <!-- Be precise about technical terms: outcome and domain. Be more smooth. -->
 
-For the purposes of this course, a *probability distribution* is a mathematical object that covers a set of outcomes, where each distinct outcome has a chance of occurring between 0 and 1. The sum of all chances equals to 1. The set of possible outcomes --- heads or tails for the coin, 1 through 6 for the die --- can be either discrete or continuous. This set of possible outcomes is the *domain* of the probability distribution. There are three types of probability distributions: mathematical, empirical, and posterior. Let's walk through some examples to better understand each type of probability distribution.
+For the purposes of this course, a *probability distribution* is a mathematical object that covers a set of outcomes, where each distinct outcome has a chance of occurring between 0 and 1 inclusive. The set of possible outcomes --- heads or tails for the coin, 1 through 6 for the die --- can be either discrete or continuous. This set of outcomes is the *domain* of the probability distribution. There are three types of probability distributions: mathematical, empirical, and posterior. Let's walk through some examples to better understand each type of probability distribution.
 
 ### Flipping a coin
 
@@ -344,7 +344,7 @@ There are many political science questions you could explore with posterior dist
 
 ### Unnormalized distributions
 
-Remember that probability distributions are mathematical objects that cover a set of outcomes, where each distinct outcome has a chance of occurring between 0 and 1 and the sum of all chances equals to 1. Sometimes, you may see distributions similar to probability distributions, only the y-axis displays raw counts instead of proportions. Unnormalized distributions are not probability distributions, but it is easy to convert between the two. You simply divide all the outcome counts on the y-axis by the sum of all outcome counts to "normalize" and unnormalized distribution. Unnormalized distributions are often an intermediary step; it is often handy to work with counts until the very end.
+Remember that probability distributions are mathematical objects that cover a set of outcomes, where each outcome in the domain is mapped to a probability value between 0 and 1 inclusive and the sum of all mappings is 1. Sometimes, you may see distributions similar to probability distributions, only the y-axis displays raw counts instead of proportions. Unnormalized distributions are not probability distributions, but it is easy to convert between the two. You simply divide all the outcome counts on the y-axis by the sum of all outcome counts to "normalize" and unnormalized distribution. Unnormalized distributions are often an intermediary step; it is often handy to work with counts until the very end.
 
 For instance, we can generate the following unnormalized distribution for the sum of rolling two die (empirical distribution from running this simulation 100 times). You may notice that the shape of the distribution is the same as the empirical probability distribution we generated earlier, only the y-axis is labeled differently.
 
