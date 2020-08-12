@@ -349,9 +349,14 @@ There are many political science questions you could explore with posterior dist
 
 Now we understand that p(A) can represent the probability distribution of outcomes for event A. Let's talk about joint distributions, which can be represented by p(A, B). Joint distributions are also mathematical objects that cover a set of outcomes, where each distinct outcome has a chance of occurring between 0 and 1 and the sum of all chances equals to 1. The key to a joint distribution is it measures the chance that both events A and B will occur simultaneously.
 
-Let's say that you are rolling two six-sided die simultaneously. One is weighted so that there is a 50% chance of rolling a 6 and a 10% chance of each of the other values. The other is weighted so there is a 50% chance of rolling a 5 and a 10% chance of rolling each of the other values. Let's roll both die 1000 times. In previous examples involving two die, we cared about the sum of results and not the outcomes of the first versus the second rolls of each simulation. With a joint distributions, the order matters so instead of 11 possible outcomes on the x-axis of our distribution graph (ranging from 2 to 12), we have 36. Furthermore, a 2D probability distribution is not sufficient to represent all of the variables involved, so the joint distribution for this example should be displayed using a 3D plot.
+Let's say that you are rolling two six-sided die simultaneously. One is weighted so that there is a 50% chance of rolling a 6 and a 10% chance of each of the other values. The other is weighted so there is a 50% chance of rolling a 5 and a 10% chance of rolling each of the other values. Let's roll both die 1000 times. In previous examples involving two die, we cared about the sum of results and not the outcomes of the first versus the second rolls of each simulation. With a joint distributions, the order matters so instead of 11 possible outcomes on the x-axis of our distribution graph (ranging from 2 to 12), we have 36. Furthermore, a 2D probability distribution is not sufficient to represent all of the variables involved, so the joint distribution for this example is displayed using a 3D plot.
 
-![](05-probability/animations/joint_distribution.gif)
+```{r, echo=FALSE, fig.fullwidth = TRUE, caption = "Economist Posterior from August 8, 2020"}
+
+knitr::include_graphics("05-probability/images/rayshader1.png")
+
+```
+
 <!-- 1a) Add 4th sub-subpart to first part explaining Joint Distributions. Do this at the end of probability distribution part.  Example is one die with 50% likelihood of coming up 6 (and other faces at 10%) and second die 50% likelihood. Don't only care about the total. In this situation, you need a 3d plot. p(A, B) is p(Result of Die 1, Result of Die 2). Just one empirical plot of 100 rolls. Almost done, making 3D graph right now VZ -->
 
 <!-- DK: Update. I think that either plotly (https://plotly.com/r/3d-surface-plots/) or rayshader (https://www.rayshader.com/#3d-plotting-with-rayshader-and-ggplot2) is the way to go. These are the future of 3d plots in R, not plot3D. -->
