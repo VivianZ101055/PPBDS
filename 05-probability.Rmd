@@ -7,7 +7,7 @@ output_yaml:
 
 <!-- 0) Section headings are in sentence case (with only the first word capitalized, unless it is something always capitalized) rather than title case, which is what they are now. Section heading do not end with a period. Done VZ -->
 
-<!-- 1a) Add 4th sub-subpart to first part explaining Joint Distributions. Do this at the end of probability distribution part.  Example is one die with 50% likelihood of coming up 6 (and other faces at 10%) and second die 50% likelihood. Don't only care about the total. In this situation, you need a 3d plot. p(A, B) is p(Result of Die 1, Result of Die 2). Just one empirical plot of 100 rolls. Almost done, making 3D graph right now VZ -->
+<!-- 1a) Add 4th sub-subpart to first part explaining Joint Distributions. Do this at the end of probability distribution part.  Example is one die with 50% likelihood of coming up 6 (and other faces at 10%) and second die 50% likelihood. Don't only care about the total. In this situation, you need a 3d plot. p(A, B) is p(Result of Die 1, Result of Die 2). Just one empirical plot of 100 rolls. Done VZ - figuring out how to change the axis titles on the rayshader plot -->
 
 <!-- DK: Update. I think that either plotly (https://plotly.com/r/3d-surface-plots/) or rayshader (https://www.rayshader.com/#3d-plotting-with-rayshader-and-ggplot2) is the way to go. These are the future of 3d plots in R, not plot3D. -->
 
@@ -282,9 +282,9 @@ ggplot(mydata, aes(x = results)) +
 
 ### Presidential elections
 
-Now we let's say we are building probability distributions for political events, like a presidential election. We want to know p(Democrats win x electoral votes), where x represents the range of possible outcomes from 0 to 538.
+Now we let's say we are building probability distributions for political events, like a presidential election. We want to know p(Democratic candidate wins x electoral votes), where x represents the range of possible outcomes from 0 to 538.
 
-It would be incredibly naive to create the following *mathematical distribution*. We create a distribution by running a simulation 10,000 times, where the chances of the Democrats winning any given electoral vote is 0.5.
+It would be incredibly naive to create the following *mathematical distribution*. We create a distribution by running a simulation 10,000 times, where the chances of the Democratic candidate winning any given electoral vote is 0.5.
 
 ```{r, echo=FALSE}
 
@@ -300,6 +300,7 @@ result <- tibble(total = (matrix(rbinom(sims*length(ev),
 ggplot(data = result, aes(total)) +
   geom_histogram(aes(y=..count../sum(..count..)), binwidth = 1) +
   labs(title = "Mathematical Probability Distribution",
+       subtitle = "Presidential Elections",
        y = "Probability",
        x = "Outcome\nElectoral Vote Total for Democratic Candidate") +
   theme_classic()
@@ -341,9 +342,36 @@ There are many political science questions you could explore with posterior dist
 * Present: What is the median height of Harvard students?
 * Future: How many electoral votes will a presidential candidate win?
 
-<!-- We need a continuous distribution. -->
+### Unnormalized distributions
 
-<!-- Add 4th subsubpart to first part explaining Joint Distributions. Do this at the end of probability distribution part.  Example is one die with 50% likelihood of coming up 6 (and other faces at 10%) and second die 50% likelihood. Don't only care about the total. In this situation, you need a 3d plot. p(A, B) is p(Result of Die 1, Result of Die 2). Just one empirical plot of 100 roles. -->
+Remember that probability distributions are mathematical objects that cover a set of outcomes, where each distinct outcome has a chance of occurring between 0 and 1 and the sum of all chances equals to 1. Sometimes, you may see distributions similar to probability distributions, only the y-axis displays raw counts instead of proportions. Unnormalized distributions are not probability distributions, but it is easy to convert between the two. You simply divide all the outcome counts on the y-axis by the sum of all outcome counts to "normalize" and unnormalized distribution. Unnormalized distributions are often an intermediary step; it is often handy to work with counts until the very end.
+
+For instance, we can generate the following unnormalized distribution for the sum of rolling two die (empirical distribution from running this simulation 100 times). You may notice that the shape of the distribution is the same as the empirical probability distribution we generated earlier, only the y-axis is labeled differently.
+
+```{r, echo=FALSE}
+
+set.seed(1)
+
+dice <- c(1:6)
+
+sims <- 100
+
+mydata <- tibble(dice_1 = sample(dice, size = sims, replace = TRUE),
+                 dice_2 = sample(dice, size = sims, replace = TRUE))
+
+mydata <- mydata %>%
+  mutate(sum = (dice_1 + dice_2))
+
+ggplot(mydata, aes(x = sum)) +
+  geom_histogram(binwidth = 1, color = "white") +
+  labs(title = "Empirical Unnormalized Distribution",
+       subtitle = "Sum from Rolling Two Die A Hundred Times",
+       x = "Outcome\nSum of Two Die",
+       y = "Count") +
+  scale_x_continuous(breaks = seq(0,12,1), labels = 0:12) +
+  theme_classic()
+
+```
 
 ### Joint distributions
 
@@ -355,16 +383,6 @@ Let's say that you are rolling two six-sided die simultaneously. One is weighted
 
 knitr::include_graphics("05-probability/images/rayshader1.png")
 
-```
-
-<!-- 1a) Add 4th sub-subpart to first part explaining Joint Distributions. Do this at the end of probability distribution part.  Example is one die with 50% likelihood of coming up 6 (and other faces at 10%) and second die 50% likelihood. Don't only care about the total. In this situation, you need a 3d plot. p(A, B) is p(Result of Die 1, Result of Die 2). Just one empirical plot of 100 rolls. Almost done, making 3D graph right now VZ -->
-
-<!-- DK: Update. I think that either plotly (https://plotly.com/r/3d-surface-plots/) or rayshader (https://www.rayshader.com/#3d-plotting-with-rayshader-and-ggplot2) is the way to go. These are the future of 3d plots in R, not plot3D. -->
-
-The fact that we're talking about joint distributions where we roll two die doesn't change the meaning of a probability distribution. As you can see through the tibble, the sum of the probabilities of all the outcomes is 1.
-
-```{r}
-sum(mydata$probability)
 ```
 
 ## Tree diagrams
