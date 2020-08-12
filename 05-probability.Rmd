@@ -298,7 +298,7 @@ result <- tibble(total = (matrix(rbinom(sims*length(ev),
                  ncol = length(ev)) %*% ev)[,1])
 
 ggplot(data = result, aes(total)) +
-  geom_histogram(aes(y=..count../sum(..count..)), binwidth = 1, color = "white") +
+  geom_histogram(aes(y=..count../sum(..count..)), binwidth = 1) +
   labs(title = "Mathematical Probability Distribution",
        y = "Probability",
        x = "Outcome\nElectoral Vote Total for Democratic Candidate") +
@@ -351,21 +351,10 @@ Now we understand that p(A) can represent the probability distribution of outcom
 
 Let's say that you are rolling two six-sided die simultaneously. One is weighted so that there is a 50% chance of rolling a 6 and a 10% chance of each of the other values. The other is weighted so there is a 50% chance of rolling a 5 and a 10% chance of rolling each of the other values. Let's roll both die 1000 times. In previous examples involving two die, we cared about the sum of results and not the outcomes of the first versus the second rolls of each simulation. With a joint distributions, the order matters so instead of 11 possible outcomes on the x-axis of our distribution graph (ranging from 2 to 12), we have 36. Furthermore, a 2D probability distribution is not sufficient to represent all of the variables involved, so the joint distribution for this example should be displayed using a 3D plot.
 
+![](05-probability/animations/joint_distribution.gif)
 <!-- 1a) Add 4th sub-subpart to first part explaining Joint Distributions. Do this at the end of probability distribution part.  Example is one die with 50% likelihood of coming up 6 (and other faces at 10%) and second die 50% likelihood. Don't only care about the total. In this situation, you need a 3d plot. p(A, B) is p(Result of Die 1, Result of Die 2). Just one empirical plot of 100 rolls. Almost done, making 3D graph right now VZ -->
 
 <!-- DK: Update. I think that either plotly (https://plotly.com/r/3d-surface-plots/) or rayshader (https://www.rayshader.com/#3d-plotting-with-rayshader-and-ggplot2) is the way to go. These are the future of 3d plots in R, not plot3D. -->
-
-```{r, echo=FALSE}
-mydata <- tibble(die.1 = sample(1:6, size = 1000, prob =
-                                  c(0.1,0.1,0.1,0.1,0.1,0.5), replace = TRUE),
-                 die.2 = sample(1:6, size = 1000, prob =
-                                  c(0.1,0.1,0.1,0.1,0.5,0.1), replace = TRUE)) %>%
-  group_by(die.1, die.2) %>%
-  summarize(total = n()) %>%
-  ungroup() %>%
-  mutate(probability = total/sum(total))
-mydata
-```
 
 The fact that we're talking about joint distributions where we roll two die doesn't change the meaning of a probability distribution. As you can see through the tibble, the sum of the probabilities of all the outcomes is 1.
 
