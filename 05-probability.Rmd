@@ -180,7 +180,9 @@ ggplot(mydata, aes(x = results)) +
 
 An *posterior distribution* is based on beliefs and expectations. It displays your belief about things you can't see right now. You may have posterior distributions for events in the past, present, or future.
 
-In the case of the coin toss, the posterior distribution changes depending on your beliefs. For instance, let's say your friend brought a coin to school and asked to bet you. If the result is heads, you have to pay them $5. This makes you suspicious; your posterior distribution would reflect this. You might believe that p(Heads) is 0.95 while p(Tails) is 0.05.
+In the case of the coin toss, the posterior distribution changes depending on your beliefs. For instance, let's say your friend brought a coin to school and asked to bet you. If the result is heads, you have to pay them $5. 
+
+This makes you suspicious; your posterior distribution would reflect this. You might believe that $p_h$ is 0.95 while $p_t$ is 0.05.
 
 ```{r, echo = FALSE}
 
@@ -230,7 +232,7 @@ ggplot(mydata, aes(x = sum)) +
 
 ```
 
-We get an *empirical distribution* by running a simulation and rolling two die a hundred times. The result is not as perfect and even as the mathematical distribution, but we can observe that the p(2) and p(12), which are displayed on the left and right most ends of the distribution, are far lower than the p(values near the center of the distribution).
+We get an *empirical distribution* by running a simulation and rolling two die a hundred times. The result is not as perfect and even as the mathematical distribution, but we can observe that the $p_2$ and $p_12$, which are displayed on the left and right most ends of the distribution, are far lower than the p(values near the center of the distribution).
 
 ```{r, echo=FALSE}
 
@@ -284,7 +286,7 @@ ggplot(mydata, aes(x = results)) +
 
 ### Presidential elections
 
-Now we let's say we are building probability distributions for political events, like a presidential election. We want to know p(Democratic candidate wins x electoral votes), where x represents the range of possible outcomes from 0 to 538.
+Now we let's say we are building probability distributions for political events, like a presidential election. We want to know the probability that Democratic candidate wins x electoral votes, where x represents the range of possible outcomes from 0 to 538.
 
 It would be incredibly naive to create the following *mathematical distribution*. We create a distribution by running a simulation 10,000 times, where the chances of the Democratic candidate winning any given electoral vote is 0.5.
 
@@ -377,7 +379,7 @@ ggplot(mydata, aes(x = sum)) +
 
 ### Joint distributions
 
-Now we understand that p(A) can represent the probability distribution of outcomes for event A. Let's talk about joint distributions, which can be represented by p(A, B). Joint distributions are also mathematical objects that cover a set of outcomes, where each distinct outcome has a chance of occurring between 0 and 1 and the sum of all chances equals to 1. The key to a joint distribution is it measures the chance that both events A and B will occur simultaneously.
+Now we understand that $p_A$ can represent the probability distribution of outcomes for event A. Let's talk about joint distributions, which can be represented by p(A, B). Joint distributions are also mathematical objects that cover a set of outcomes, where each distinct outcome has a chance of occurring between 0 and 1 and the sum of all chances equals to 1. The key to a joint distribution is it measures the chance that both events A and B will occur simultaneously.
 
 Let's say that you are rolling two six-sided die simultaneously. One is weighted so that there is a 50% chance of rolling a 6 and a 10% chance of each of the other values. The other is weighted so there is a 50% chance of rolling a 5 and a 10% chance of rolling each of the other values. Let's roll both die 1000 times. In previous examples involving two die, we cared about the sum of results and not the outcomes of the first versus the second rolls of each simulation. With a joint distributions, the order matters so instead of 11 possible outcomes on the x-axis of our distribution graph (ranging from 2 to 12), we have 36. Furthermore, a 2D probability distribution is not sufficient to represent all of the variables involved, so the joint distribution for this example is displayed using a 3D plot.
 
