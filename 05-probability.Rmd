@@ -6,11 +6,7 @@ output_yaml:
 # Probability
 
 
-<<<<<<< HEAD
-<!-- 1a) Add 4th sub-subpart to first part explaining Joint Distributions. Do this at the end of probability distribution part.  Example is one die with 50% likelihood of coming up 6 (and other faces at 10%) and second die 50% likelihood. Don't only care about the total. In this situation, you need a 3d plot. p(A, B) is p(Result of Die 1, Result of Die 2). Just one empirical plot of 100 rolls. Done VZ -->
-=======
 <!-- 1) Add 538 data in a plot that looks like our other plots. Add 538 screen shot. Replace Economist current screen shot with today's.  -->
->>>>>>> master
 
 <!-- 2) Cut Joint distribution discussion from Tree Diagrams. Move some (?) of that material to earlier discussion, if you want. -->
 
@@ -18,11 +14,6 @@ output_yaml:
 
 <!-- In other words, almost every probability distribution is conditional and posterior, so we leave out both words, as we generally will in this book. They are always implicit. -->
 
-<<<<<<< HEAD
-<!-- 3) Adding three model example. Situation is that there is a bag with two marbles: either both white, both black or one of each. Those are the three models. Then, you take (and then replace) one marble three times. Possible values you can get: three blacks, two blacks, one black, zero blacks. So, we have three models and four possible experimental results. This is the bridge between the simple Bayes example with two models (disease or no) and two possible experiment results (positive test or negative test) and the N model example. -->
-
-<!-- 4) Change $p$, meaning the probability of heads, to $p_h$ everywhere, This is much clearer. - done VZ-->
-=======
 <!-- p_h everywhere -->
 
 <!-- Can we replace Maria's animation with rayshader? OK to use three rayshaders to tell the story. -->
@@ -32,7 +23,6 @@ output_yaml:
 
 <!-- 3) Adding three model example. Situation is that there is a bag with two marbles: either both white, both black or one of each. Those are the three models. Then, you take (and then replace) one marble three times. Possible values you can get: three blacks, two blacks, one black, zero blacks. So, we have three models and four possible experimental results. This is the bridge between the simple Bayes example with two models (disease or no) and two possible experiment results (positive test or negative test) and the N model example. -->
 
->>>>>>> master
 
 
 <!-- Parameter means no parathesis. Anytime you talk about a specific p, you must add a subscript, otherwise how do you know what you are talking about. But, at the same time, it is annoying to write long subscripts, like $p_{Bidengets370electorvotes}$, so it is better to just come up with a short subscript, like $p_370$, where the context makes clear what this refers to. -->
