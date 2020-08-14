@@ -336,7 +336,7 @@ ggplot(mydata, aes(x = electoral_votes)) +
 
 ```
 
-The *posterior distribution* in the election case is something many data scientists actually devote a lot of time to. Consider this projection from The Economist, which uses various assumptions to generate a forecast. The analysts have developed an algorithm that considers their expectations for each outcome. Here is a posterior from the Economist website. This looks confusing at first because the data analysts have chosen to merge the axes for Republican and Democratic electoral votes. For each electoral result, the height of the bar represents the probability that a given event will occur. However, there is no numbered y-axis telling us what the specific probability of each outcome is.
+The *posterior distribution* in the election case is something data scientists devote a lot of time to. The analysts develop algorithms that consider their expectations for each outcome. Consider this generated using data from FiveThirtyEight.
 
 ```{r, echo = F}
 
@@ -345,7 +345,7 @@ posterior_prez <- read.csv("./05-probability/data/election-forecasts-2020/prez_1
 
 ggplot(posterior_prez, aes(total_ev,evprob_chal)) +
   geom_bar(stat='identity') +
-  labs(title = "Probability Distribution Based on FiveThirtyEight Data",
+  labs(title = "Posterior Probability Distribution Based on FiveThirtyEight Data",
        subtitle = "Presidential Elections",
        y = "Probability",
        x = "Outcome\nElectoral Vote Total for Democratic Candidate") +
@@ -353,12 +353,15 @@ ggplot(posterior_prez, aes(total_ev,evprob_chal)) +
 
 ```
 
+Here is a posterior from the FiveThirtyEight website from August 13, 2020. This was created using the same data as the above distribution, but simply displayed differently. For each electoral result, the height of the bar represents the probability that a given event will occur. However, there is no numbered y-axis telling us what the specific probability of each outcome is.
 
 ```{r, echo=FALSE, caption = "FiveThirtyEight Posterior from August 13, 2020"}
 
 knitr::include_graphics("05-probability/images/fivethirtyeight.png")
 
 ```
+
+Here is a posterior from the Economist website (also from August 13, 2020). This looks confusing at first because the data analysts have chosen to merge the axes for Republican and Democratic electoral votes. We can tell that the Economist is quite optimistic about Biden's odds in the election compared to Trump's.
 
 ```{r, echo=FALSE, fig.fullwidth = TRUE, caption = "Economist Posterior from August 13, 2020"}
 
