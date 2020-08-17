@@ -157,7 +157,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a href="shiny.html">Shiny</a>
 <a href="maps.html">Maps</a>
 <a href="animation.html">Animation</a>
-<a href="rubin-causal-model.html">References</a>
+<a href="references.html">References</a>
 </div>
 </li>
 </ul>
@@ -185,7 +185,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ol>
 <p>For example, say you are interested in an outcome variable <span class="math inline">\(y\)</span> of whether patients develop lung cancer and information <span class="math inline">\(x\)</span> on their risk factors, such as smoking habits, age, and socioeconomic status. If we are modeling for explanation, we would be interested in both describing and quantifying the effects of the different risk factors. One reason could be that you want to design an intervention to reduce lung cancer incidence in a population, such as increasing family income. In that case, you would want to know the causal effect of income on the incidence of lung cancer.</p>
 <p>If we are modeling for prediction, however, we wouldn’t care so much about understanding how all the individual risk factors contribute to lung cancer, but rather only whether we can make good predictions of which people will contract lung cancer.</p>
-<!-- DK: Find a way to use this reference: [*An Introduction to Statistical Learning with Applications in R (ISLR)*](http://www-bcf.usc.edu/~gareth/ISL/)  -->
+<!-- DK: Find a way to use this reference: [*An Introduction to Statistical Learning with Applications in R (ISLR)*](http://www-bcf.usc.edu/~gareth/ISL/)  Use @islr2017. Maybe side margin with book cover. -->
 <p>Linear regression involves a <em>numerical</em> outcome variable <span class="math inline">\(y\)</span> and explanatory variables <span class="math inline">\(x\)</span> that are either <em>numerical</em> or <em>categorical</em>. Furthermore, the relationship between <span class="math inline">\(y\)</span> and <span class="math inline">\(x\)</span> is assumed to be linear, or in other words, a line. However, we’ll see that what constitutes a “line” will vary depending on the nature of your explanatory variables <span class="math inline">\(x\)</span>.</p>
 <!-- DK: Could give a better plan overview, including discussion of chapters 11 and 12. Indeed, perhaps also looking backward to sampling and uncertainty. Need to rewrite this if we re-organize the book. Indeed, the introductions (and conclusions) to each chapter should be similar, providing a framework in which that chapter fits. -->
 <p>In Section <a href="pitfalls.html#model1">10.1</a>, the explanatory variable will be numerical. This scenario is known as <em>simple linear regression</em>. In Section <a href="#model2"><strong>??</strong></a>, the explanatory variable will be categorical.</p>
@@ -301,187 +301,83 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb947"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb947-1"><a href="pitfalls.html#cb947-1"></a>qscores_ch10 <span class="op">%&gt;%</span><span class="st"> </span></span>
 <span id="cb947-2"><a href="pitfalls.html#cb947-2"></a><span class="st">  </span><span class="kw">select</span>(rating, hours) <span class="op">%&gt;%</span><span class="st"> </span></span>
 <span id="cb947-3"><a href="pitfalls.html#cb947-3"></a><span class="st">  </span><span class="kw">skim</span>()</span></code></pre></div>
-<table style="width: auto;" class="table table-condensed">
-<caption>
-<span id="tab:unnamed-chunk-704">TABLE 10.1: </span>Data summary
-</caption>
-<thead><tr>
-<th style="text-align:left;">
-</th>
-<th style="text-align:left;">
-</th>
-</tr></thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-Name
-</td>
-<td style="text-align:left;">
-Piped data
-</td>
+<p><!--
+<caption>--><span class="marginnote shownote"><span id="tab:unnamed-chunk-705">TABLE 10.1: </span>Data summary</span><!--</caption>--></p>
+<table><tbody>
+<tr class="odd">
+<td align="left">Name</td>
+<td align="left">Piped data</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Number of rows
-</td>
-<td style="text-align:left;">
-14
-</td>
+<tr class="even">
+<td align="left">Number of rows</td>
+<td align="left">14</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Number of columns
-</td>
-<td style="text-align:left;">
-2
-</td>
+<tr class="odd">
+<td align="left">Number of columns</td>
+<td align="left">2</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-_______________________
-</td>
-<td style="text-align:left;">
-</td>
+<tr class="even">
+<td align="left">_______________________</td>
+<td align="left"></td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Column type frequency:
-</td>
-<td style="text-align:left;">
-</td>
+<tr class="odd">
+<td align="left">Column type frequency:</td>
+<td align="left"></td>
 </tr>
-<tr>
-<td style="text-align:left;">
-numeric
-</td>
-<td style="text-align:left;">
-2
-</td>
+<tr class="even">
+<td align="left">numeric</td>
+<td align="left">2</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-________________________
-</td>
-<td style="text-align:left;">
-</td>
+<tr class="odd">
+<td align="left">________________________</td>
+<td align="left"></td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Group variables
-</td>
-<td style="text-align:left;">
-None
-</td>
+<tr class="even">
+<td align="left">Group variables</td>
+<td align="left">None</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <p><strong>Variable type: numeric</strong></p>
 <table>
-<thead><tr>
-<th style="text-align:left;">
-skim_variable
-</th>
-<th style="text-align:right;">
-n_missing
-</th>
-<th style="text-align:right;">
-complete_rate
-</th>
-<th style="text-align:right;">
-mean
-</th>
-<th style="text-align:right;">
-sd
-</th>
-<th style="text-align:right;">
-p0
-</th>
-<th style="text-align:right;">
-p25
-</th>
-<th style="text-align:right;">
-p50
-</th>
-<th style="text-align:right;">
-p75
-</th>
-<th style="text-align:right;">
-p100
-</th>
-<th style="text-align:left;">
-hist
-</th>
+<thead><tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">mean</th>
+<th align="right">sd</th>
+<th align="right">p0</th>
+<th align="right">p25</th>
+<th align="right">p50</th>
+<th align="right">p75</th>
+<th align="right">p100</th>
+<th align="left">hist</th>
 </tr></thead>
 <tbody>
-<tr>
-<td style="text-align:left;">
-rating
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-440.7
-</td>
-<td style="text-align:right;">
-54.70
-</td>
-<td style="text-align:right;">
-290.0
-</td>
-<td style="text-align:right;">
-420.0
-</td>
-<td style="text-align:right;">
-455.0
-</td>
-<td style="text-align:right;">
-480.0
-</td>
-<td style="text-align:right;">
-490.0
-</td>
-<td style="text-align:left;">
-▁▁▂▅▇
-</td>
+<tr class="odd">
+<td align="left">rating</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">440.7</td>
+<td align="right">54.70</td>
+<td align="right">290.0</td>
+<td align="right">420.0</td>
+<td align="right">455.0</td>
+<td align="right">480.0</td>
+<td align="right">490.0</td>
+<td align="left">▁▁▂▅▇</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-hours
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-3.5
-</td>
-<td style="text-align:right;">
-0.77
-</td>
-<td style="text-align:right;">
-2.5
-</td>
-<td style="text-align:right;">
-2.9
-</td>
-<td style="text-align:right;">
-3.5
-</td>
-<td style="text-align:right;">
-3.7
-</td>
-<td style="text-align:right;">
-5.2
-</td>
-<td style="text-align:left;">
-▆▇▃▃▂
-</td>
+<tr class="even">
+<td align="left">hours</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">3.5</td>
+<td align="right">0.77</td>
+<td align="right">2.5</td>
+<td align="right">2.9</td>
+<td align="right">3.5</td>
+<td align="right">3.7</td>
+<td align="right">5.2</td>
+<td align="left">▆▇▃▃▂</td>
 </tr>
 </tbody>
 </table>
@@ -516,11 +412,11 @@ hours
 </ul>
 <p>The following figure gives examples of 9 different correlation coefficient values for hypothetical numerical variables <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>. For example, observe in the top right plot that for a correlation coefficient of -0.75 there is a negative linear relationship between <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>, but it is not as strong as the negative linear relationship between <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> when the correlation coefficient is -0.9 or -1.</p>
 <div class="figure">
-<span id="fig:unnamed-chunk-705"></span>
+<span id="fig:unnamed-chunk-706"></span>
 <p class="caption marginnote shownote">
 FIGURE 10.1: Nine different correlation coefficients.
 </p>
-<img src="book_temp_files/figure-html/unnamed-chunk-705-1.png" alt="Nine different correlation coefficients." width="672">
+<img src="book_temp_files/figure-html/unnamed-chunk-706-1.png" alt="Nine different correlation coefficients." width="672">
 </div>
 <p>The correlation coefficient can be computed using the <code>cor()</code> summary function within a <code>summarize()</code>:</p>
 <div class="sourceCode" id="cb948"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb948-1"><a href="pitfalls.html#cb948-1"></a>qscores_ch10 <span class="op">%&gt;%</span><span class="st"> </span></span>
@@ -534,11 +430,11 @@ FIGURE 10.1: Nine different correlation coefficients.
 <span id="cb949-5"><a href="pitfalls.html#cb949-5"></a>       <span class="dt">y =</span> <span class="st">"Q Guide Rating"</span>,</span>
 <span id="cb949-6"><a href="pitfalls.html#cb949-6"></a>       <span class="dt">title =</span> <span class="st">"Scatterplot of relationship between Q Scores and Weekly Workload"</span>)</span></code></pre></div>
 <div class="figure">
-<span id="fig:unnamed-chunk-709"></span>
+<span id="fig:unnamed-chunk-710"></span>
 <p class="caption marginnote shownote">
 FIGURE 10.2: Q Guide Scores at Harvard
 </p>
-<img src="book_temp_files/figure-html/unnamed-chunk-709-1.png" alt="Q Guide Scores at Harvard" width="672">
+<img src="book_temp_files/figure-html/unnamed-chunk-710-1.png" alt="Q Guide Scores at Harvard" width="672">
 </div>
 <!-- EG: Need to be more precise with this in the future. Will come back and edit later. -->
 <p>Observe that most courses have reported average workloads between 2 and 10 hours per week, while most teaching scores lie between 3 and 5. Furthermore, while opinions may vary, it is our opinion that the relationship between Q guide rating and weekly workload in hours is “weakly negative.” This is consistent with our earlier computed correlation coefficient of -0.49.</p>
@@ -550,11 +446,11 @@ FIGURE 10.2: Q Guide Scores at Harvard
 <span id="cb950-4"><a href="pitfalls.html#cb950-4"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">"Hours of Work Per Week"</span>, <span class="dt">y =</span> <span class="st">"Q Guide Score"</span>,</span>
 <span id="cb950-5"><a href="pitfalls.html#cb950-5"></a>       <span class="dt">title =</span> <span class="st">"Scatterplot of relationship between Q Scores and Weekly Workload"</span>)</span></code></pre></div>
 <div class="figure">
-<span id="fig:unnamed-chunk-711"></span>
+<span id="fig:unnamed-chunk-712"></span>
 <p class="caption marginnote shownote">
 FIGURE 10.3: Q Guide Scores at Harvard.
 </p>
-<img src="book_temp_files/figure-html/unnamed-chunk-711-1.png" alt="Q Guide Scores at Harvard." width="672">
+<img src="book_temp_files/figure-html/unnamed-chunk-712-1.png" alt="Q Guide Scores at Harvard." width="672">
 </div>
 <!-- EG: I'll change this section as well after changing the box size. -->
 <p>It is now apparent that there are ?? points in the area highlighted in the box and not six as originally suggested. Recall from Subsection <a href="#overplotting"><strong>??</strong></a> on overplotting that jittering adds a little random “nudge” to each of the points to break up these ties. Furthermore, recall that jittering is strictly a visualization tool; it does not alter the original values in the data frame <code>qscores_ch10</code>. To keep things simple going forward, however, we’ll only present regular scatterplots rather than their jittered counterparts.</p>
@@ -567,11 +463,11 @@ FIGURE 10.3: Q Guide Scores at Harvard.
 <span id="cb951-6"><a href="pitfalls.html#cb951-6"></a><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">"lm"</span>, <span class="dt">se =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
 <pre><code>## `geom_smooth()` using formula 'y ~ x'</code></pre>
 <div class="figure">
-<span id="fig:unnamed-chunk-712"></span>
+<span id="fig:unnamed-chunk-713"></span>
 <p class="caption marginnote shownote">
 FIGURE 10.4: Regression line.
 </p>
-<img src="book_temp_files/figure-html/unnamed-chunk-712-1.png" alt="Regression line." width="672">
+<img src="book_temp_files/figure-html/unnamed-chunk-713-1.png" alt="Regression line." width="672">
 </div>
 <p>The line in the resulting figure is called a “regression line.” The regression line  is a visual summary of the relationship between two numerical variables, in our case the outcome variable <code>rating</code> and the explanatory variable <code>hours</code>. The positive slope of the blue line is consistent with our earlier observed correlation coefficient of -0.49 suggesting that there is a negative relationship between these two variables: as students report higher average weekly workloads for music classes, courses receive lower teaching evaluations. We’ll see later, however, that while the correlation coefficient and the slope of a regression line always have the same sign (positive or negative), they typically do not have the same value.</p>
 <p>Furthermore, a regression line is “best-fitting” in that it minimizes some mathematical criteria. We present these mathematical criteria in Section <a href="#leastsquares"><strong>??</strong></a>, but we suggest you read this subsection only after first reading the rest of this section on regression with one numerical explanatory variable.</p>
@@ -585,7 +481,7 @@ FIGURE 10.4: Regression line.
 <a href="continuous-response.html"><button class="btn btn-default">Next</button></a>
 </p>
 <p class="build-date">Page built: 
-2020-08-13
+2020-08-16
 </p>
 </div>
 </div>
