@@ -841,7 +841,9 @@ What kind of distribution are you looking at? The first feature to notice is tha
 
 The next question: is the distribution you see displayed above mathematical, empirical, or posterior? Well, technically all of them! Everytime we make a claim about the world, it is technically a claim about our beliefs. We could definitely be wrong and beliefs differ amongst people. In the case of the rare disease called $X$, we believe that the illness only affects 1% of the population. Since almost all probability distributions are posteriors in some way, shape, or form, we often leave out the word "posterior" when we call something a probability distribution. Up to now, we have distinguished between the three -- however, it is good to know that there is actually significant overlap.
 
-Now, let's visualize our two model distribution. 
+However, just because the probability of having the disease is 1% and the test is 99% accurate, it doesn't mean that these are the exact numbers that always work out in the real world. That is, for a *sample* of 100000, a disease frequency of 1% doesn't necessarily mean that 100 people have the disease. It could be 101. Or 98. Or 105! Given that uncertainty, we model. We built an understanding of the world and now we can express it in counts. We can use our model to understand what the implications of an event (testing positive) are on our belief that we have the disease.
+
+Let's visualize our two model distribution.
 
 ```{r disease, fig.align="center", echo = FALSE}
 
@@ -864,22 +866,6 @@ ggplot(pop, aes(x = as.factor(have_disease), y = as.factor(positive_test))) +
     y = "Do you have the disease?")
 
 ```
-
-
-Remember, we're currently conceptualizing probability in counts. Therefore, a .1% chance of having the disease means 10 people have it and a 99% chance of testing correctly (a 1% chance of testing incorrectly) means 100 people were incorrectly identified as positive (in addition to the 10 people who tested positive correctly). So, to recap:
-
-* 10 people have the disease
-
-* They all tested positive
-
-* 9990 people don't have the disease
-
-* 100 of them still tested positive
-
-There's a population of 110 people who tested positive and only 10 of them have the disease. So, if you test positive, your chances of having the disease are $10\div110$, which is equal to 9%!
-
-Now, let's switch back to proportion-based probabilities and think about it. Just because the probability of having the disease is .1% and the test is 99% accurate, it doesn't mean that these are the exact numbers that always work out in the real world. That is, for a *sample* of 10,000, a disease frequency of .1% doesn't necessarily mean that 10 people have the disease. It could be 11. Or 9. Or 20! Given that uncertainty, we do what we did above. We model. We built and understanding of the world and expressed it in counts. We then used that to understand what the implications of an event (testing positive) are on our belief that we have the disease. In the next section, we'll follow the same principle but make this a little more complicated.
-
 
 ## Three models
 
