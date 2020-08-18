@@ -420,7 +420,7 @@ Let's say that you are rolling two six-sided die simultaneously. One is weighted
 
 ```{r, echo=FALSE, fig.fullwidth = TRUE}
 
-knitr::include_graphics("05-probability/images/joint_distribution.png")
+knitr::include_graphics("05-probability/images/joint.png")
 
 ```
 
