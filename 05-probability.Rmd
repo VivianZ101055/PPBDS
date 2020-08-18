@@ -5,9 +5,9 @@ output_yaml:
 
 # Probability
 
-<!-- 1) Make rayshader.R. Creates all images and animations, places them in either images or animations folder. Lots of info and advice for whomever needs to work with this later. Get rid of all images/animations/code which we are not using. -->
+<!-- 1) Make rayshader.R. Creates all images and animations, places them in either images or animations folder. Lots of info and advice for whomever needs to work with this later. Get rid of all images/animations/code which we are not using. done VZ -->
 
-<!-- 3) Make 2 model case like N model case. Start with unnormalized. Finish with discussion of *What sort of distribution is this?* Need two paragraphs to explain.  1) It is conditional, only for people with with a positive text. But, really, all probability distributions are conditional on something. Even our coin and dice distributions are conditional on assumptions about fairness and all the other assumptions that went into constructing the joint distribution of models and data. 2) Is it empirical or mathematical or posterior? Well . . . all of them . . . Almost every time we make a claim about the world, it is a claim about our beliefs, what we think. We could be wrong! Your beliefs will differ. So, since almost all pds are posterior, we often leave out the word posterior!  -->
+<!-- 3) Make 2 model case like N model case. Start with unnormalized. Finish with discussion of *What sort of distribution is this?* Need two paragraphs to explain.  1) It is conditional, only for people with with a positive text. But, really, all probability distributions are conditional on something. Even our coin and dice distributions are conditional on assumptions about fairness and all the other assumptions that went into constructing the joint distribution of models and data. 2) Is it empirical or mathematical or posterior? Well . . . all of them . . . Almost every time we make a claim about the world, it is a claim about our beliefs, what we think. We could be wrong! Your beliefs will differ. So, since almost all pds are posterior, we often leave out the word posterior!  done VZ-->
 
 <!-- In other words, almost every probability distribution is conditional and posterior, so we leave out both words, as we generally will in this book. They are always implicit. -->
 
@@ -781,6 +781,12 @@ plot(rEG, edgeAttrs=eAttrs, attrs=attributes)
 
 You are in a city of 100,000 people. We know for a fact that exactly 1% of the population has a disease. Everyone received a test for the disease, which returned accurate results exactly 99% of the time. In terms of a count, that means 1,000 people have this disease of the 100,000 in the population. The correctly identified these individuals 99% of the time, meaning that around 990 correctly tested positive and 10 incorrectly tested negative. This city also has 99,000 people who do not have the disease, 990 of which incorrectly tested positive and 98010 of which correctly tested negative. That means that the number of people who would test positive for the disease is 1980 but *only 990 of them have the disease*. So, in simple terms, the probability of you having the disease given a positive test is $990\div1980$!
 
+```{marginfigure}
+
+Is the joint distribution empirical or mathematical or posterior? Well, all of them... Almost every time we make a claim about the world, it is a claim about our beliefs and what we think. We could be wrong! Your beliefs will differ. Since almost all probability distributions are posterior, we often leave out the word posterior!
+
+```
+
 Here is the joint empirical distribution of the test result and disease status. Note that this is an unnormalized distribution because each dot represents a person in this city.
 
 ```{r, echo = FALSE}
@@ -803,7 +809,7 @@ ggplot(pop, aes(x = as.factor(have_disease), y = as.factor(positive_test))) +
 
 ```
 
-Here is a joint distribution displayed in 3D. Instead of using the "jitter" feature in R to unstack the dots, we are using a 3D Rayshader plot to visualize the number of dots in each box. The number of people who correctly test negative in this city is 98010, far outweighing any of the other categories. There are 990 false positives, 990 true positives, and only 10 false negatives. This is why we can barely see the 3D bar coming from those sections.
+Here is the joint distribution of the test results and disease status in the city displayed in 3D. Instead of using the "jitter" feature in R to unstack the dots, we are using a 3D Rayshader plot to visualize the number of dots in each box. The number of people who correctly test negative in this city is 98010, far outweighing any of the other categories. There are 990 false positives, 990 true positives, and only 10 false negatives. This is why we can barely see the 3D bar coming from those sections.
 
 ```{r, echo=FALSE}
 
