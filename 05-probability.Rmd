@@ -15,7 +15,7 @@ output_yaml:
 <!-- Add Four Cardinal Virtues section at end, with a subsection about each virtue, with the image, just like Cass.  -->
 
 
-<!-- 3) Adding three model example. Situation is that there is a bag with two marbles: either both white, both black or one of each. Those are the three models. Then, you take (and then replace) one marble three times. Possible values you can get: three blacks, two blacks, one black, zero blacks. So, we have three models and four possible experimental results. This is the bridge between the simple Bayes example with two models (disease or no) and two possible experiment results (positive test or negative test) and the N model example. -->
+<!-- 3) Adding three model example. Situation is that there is a bag with two marbles: either both white, both black or one of each. Those are the three models. Then, you take (and then replace) one marble three times. Possible values you can get: three blacks, two blacks, one black, zero blacks. So, we have three models and four possible experimental results. This is the bridge between the simple Bayes example with two models (disease or no) and two possible experiment results (positive test or negative test) and the N model example. done VZ-->
 
 
 
@@ -828,46 +828,35 @@ knitr::include_app("https://www.youtube.com/embed/by3_weGwnMg")
 
 ## Three models
 
+```{marginfigure}
+
+This example is slightly more complex than the previous one with two models; it is the bridge between the two models example and the n models example we are about to explore.
+
+```
+
 Now, imagine that your friend gives you a bag with two marbles. There could either be two white marbles, two black marbles, or one of each color. Thus, the bag could contain 0% white marbles, 50% white marbles, or 100% white marbles. $p$ of white marbles could be 0, 0.5, or 1.
 
 Let's say you take a marble out of the bag, record whether it's black or white, then return it to the bag. You repeat this three times, observing the number of white marbles you see out of three trials. You could get three whites, two whites, one white, or zero whites as a result of this trial. Let's make what we call a Bayes scatterplot out of this. We have three models (three different proportions of white marbles in the bag) and four possible experimental results.
 
-<!-- 3) Adding three model example. Situation is that there is a bag with two marbles: either both white, both black or one of each. Those are the three models. Then, you take (and then replace) one marble three times. Possible values you can get: three blacks, two blacks, one black, zero blacks. So, we have three models and four possible experimental results. This is the bridge between the simple Bayes example with two models (disease or no) and two possible experiment results (positive test or negative test) and the N model example. -->
-
 ```{r, echo=FALSE}
 
-# all_white <- tibble(results = c(rep(3, 1000)), model = c(rep(1, 1000)))
-# 
-# all_black <- tibble(results = c(rep(0, 1000)), model = c(rep(0, 1000)))
-# 
-# mixed_bw <- tibble(results = sample(0:3, size = 1000, prob = c(0.5, 0.5), 
-#                                     replace = TRUE), model = c(rep(0.5, 1000)))
+x <- tibble(p = rep(seq(0, 1, 0.5), 1000)) %>%
+  mutate(white_marbles = map_int(p, ~ rbinom(n = 1, size = 3, p = .)))
 
-# sample(0:3, size = 1000, prob)
-
-# all_marbles <- merge(all_white, all_black, all.x = TRUE, all.y = TRUE) %>%
-#   merge(mixed_bw, all.x = TRUE, all.y = TRUE)
-# 
-# ggplot(all_marbles, aes(x = results, y = model)) + 
-#   geom_point() +
-#   geom_jitter(alpha = 0.4) +
-#   labs(
-#     title = "Sampling Distributions of Bags of Margles",
-#     subtitle = "Taking a Marble out of the Bag",
-#     x = "Number of White Marbles",
-#     y = "Proportion of White Marbles in the Bag"
-#   )
+x %>%
+  ggplot(aes(x = white_marbles, y = p)) +
+    geom_jitter(alpha = 0.5) +
+    labs(title = "Number of White Marbles and Probability of White Marbles",
+         x = "Number of White Marbles Out of 3 Samples",
+         y = "Value of p")
 
 ```
 
+```{r, echo=FALSE}
 
-<!-- # Section 4: Three Models (use the the Two Marble Example) and Scatterplots -->
+knitr::include_graphics("05-probability/images/three_models.png")
 
-<!-- 4 a)  Bayes Scatterplots show how both the data and the model can be viewed as probability distributions. If I tell the the model, the you look down one axis to see what the pdf of the data is. If I show you the data, then you look down the other axis to see the posterior pdf of the model. -->
-
-<!-- Having shown an example with two rows above, we now need an example with three. I like the two marble problem. (Cite Rethinking when you use it.) Bag of marbles contains either two white, two black or one of each. This can be formalized with a number p, which is the proportion of white marbles, which can only be 0, 0.5 or 1. Create a Bayes scatterplot for this case. Follow the coding style below. Show the marginal distributions after we observe some data. Big a useful number, like we did with 8 heads out of 20 above.-->
-
-<!-- 4 b) Show the code for doing this, both the simulation itself and how to make the graphic. Key is that we do no math anywhere. -->
+```
 
 
 <!-- # Section 5: 11 and the 1001 models. Same as coin example with unknown p as used in Albert example. First, p is 0, 0.1, 0.2, ... 0.9, 1.0. Make Bayes Scatterplot. Show marginals. Then, extend it so p takes on 1,001 values. This is how we go from discrete to continuous. All the same tricks apply. -->
