@@ -11,13 +11,9 @@ output_yaml:
 
 <!-- In other words, almost every probability distribution is conditional and posterior, so we leave out both words, as we generally will in this book. They are always implicit. done (added to the end) VZ -->
 
-
 <!-- Add Four Cardinal Virtues section at end, with a subsection about each virtue, with the image, just like Cass.  -->
 
-
 <!-- 3) Adding three model example. Situation is that there is a bag with two marbles: either both white, both black or one of each. Those are the three models. Then, you take (and then replace) one marble three times. Possible values you can get: three blacks, two blacks, one black, zero blacks. So, we have three models and four possible experimental results. This is the bridge between the simple Bayes example with two models (disease or no) and two possible experiment results (positive test or negative test) and the N model example. done VZ-->
-
-
 
 <!-- Parameter means no parathesis. Anytime you talk about a specific p, you must add a subscript, otherwise how do you know what you are talking about. But, at the same time, it is annoying to write long subscripts, like $p_{Bidengets370electorvotes}$, so it is better to just come up with a short subscript, like $p_370$, where the context makes clear what this refers to. -->
 
@@ -415,7 +411,7 @@ Now we understand that $p_A$ can represent the probability distribution of outco
 
 Let's say that you are rolling two six-sided die simultaneously. One is weighted so that there is a 50% chance of rolling a 6 and a 10% chance of each of the other values. The other is weighted so there is a 50% chance of rolling a 5 and a 10% chance of rolling each of the other values. Let's roll both die 1000 times. In previous examples involving two die, we cared about the sum of results and not the outcomes of the first versus the second rolls of each simulation. With a joint distributions, the order matters so instead of 11 possible outcomes on the x-axis of our distribution graph (ranging from 2 to 12), we have 36. Furthermore, a 2D probability distribution is not sufficient to represent all of the variables involved, so the joint distribution for this example is displayed using a 3D plot.
 
-```{r, echo=FALSE, fig.fullwidth = TRUE}
+```{r, echo=FALSE}
 
 knitr::include_graphics("05-probability/images/joint.png")
 
@@ -838,6 +834,8 @@ Now, imagine that your friend gives you a bag with two marbles. There could eith
 
 Let's say you take a marble out of the bag, record whether it's black or white, then return it to the bag. You repeat this three times, observing the number of white marbles you see out of three trials. You could get three whites, two whites, one white, or zero whites as a result of this trial. Let's make what we call a Bayes scatterplot out of this. We have three models (three different proportions of white marbles in the bag) and four possible experimental results.
 
+Here is the scatterplot visualization of the scenario:
+
 ```{r, echo=FALSE}
 
 x <- tibble(p = rep(seq(0, 1, 0.5), 1000)) %>%
@@ -851,6 +849,8 @@ x %>%
          y = "Value of p")
 
 ```
+
+Here is the 3D Rayshader visualization:
 
 ```{r, echo=FALSE}
 
@@ -1010,11 +1010,16 @@ Models are useless unless we use them for something. Let's make some predictions
 
 <!-- Difference between 0.04 and 0.06 is rarely significant. And is hardly ever a good reason to decide X over Y. -->
 
+The PPBDS contains several important themes that are relevant in all chapters. As you move through the textbook, you will be building on and refining these concepts. In this chapter, you will learn about model structure, predictive uncertainty, parameter uncertainty, unmodeled variation, and unknown unknowns. These are organized according to the four cardinal virtues that reoccur throughout the book: Prudence, Temperance, Fortitude, and Justice.
 
+## Prudence
 
-## Key themes
+## Temperance
 
-The PPBDS contains several important themes that are relevant in all chapters. As you move through the textbook, you will be building on and refining these concepts. In this chapter, you will learn about model structure, predictive uncertainty, parameter uncertainty, unmodeled variation, and unknown unknowns.
+## Fortitude
+
+## Justice
+
 
 ```{r, echo=FALSE, fig.margin=TRUE, fig.cap="Probability Themes."}
 
@@ -1077,6 +1082,18 @@ knitr::include_graphics("05-probability/images/Three_Card_Monte.jpg")
 ```
 
 What does this mean? Well imagine a crowd playing Three Card Monte in the streets of New York. The guy running the game runs a demo and shows you all the cards to make you confident. They earn money by making you overconfident and persuading you to bet. Your odds may seem good during the demo round, but that doesn't actually say anything about what will likely happen when the real, high stakes game begins. The person running the game does many simulations, making the "victim" forget that they cannot actually make any conclusions about the odds of winning. There are some variables that we simply do not know even if we put a lot of effort into making posterior probability distributions. People can be using slight of hand, for instance.
+
+```{r, echo=FALSE, fig.margin=TRUE, fig.cap="De Finetti."}
+
+knitr::include_graphics("05-probability/images/de_finetti.jpg")
+
+```
+
+```{marginfigure}
+
+Bruno de Finetti was an Italian statistician who wrote a famous treatise on the theory of probability that began with the statement "PROBABILITY DOES NOT EXIST." This is because probability only exists subjectively in our minds. It is a tool people made up and use for broad-stroke estimates.
+
+```
 
 Throughout this chapter, we spent time going through examples of conditional distributions. However, it's worth noting that all probability distributions are conditional on something. Even in the most simple examples, when we were flipping a coin multiple times, we were assuming that the probability of getting heads versus tails did not change between tosses.
 
