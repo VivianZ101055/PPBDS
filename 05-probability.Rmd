@@ -1020,6 +1020,8 @@ The PPBDS contains several important themes that are relevant in all chapters. A
 
 ## Prudence
 
+It's important to have thoughtful discretion. We can visualize probability distributions, but we should not be overconfident with our models.
+
 ### Parameter uncertainty
 
 Suppose your friend sets up a pseudo-casino in the playground of the neighborhood school. He's offering everyone the opportunity to play probability games and bet money. The first game is simple: coin tosses. If the coin lands on heads, you get five dollars. If it lands on tails, you pay three dollars.
@@ -1044,9 +1046,13 @@ knitr::include_graphics("05-probability/images/Three_Card_Monte.jpg")
 
 ```
 
-What does this mean? Well imagine a crowd playing Three Card Monte in the streets of New York. The guy running the game runs a demo and shows you all the cards to make you confident. They earn money by making you overconfident and persuading you to bet. Your odds may seem good during the demo round, but that doesn't actually say anything about what will likely happen when the real, high stakes game begins. The person running the game does many simulations, making the "victim" forget that they cannot actually make any conclusions about the odds of winning. There are some variables that we simply do not know even if we put a lot of effort into making posterior probability distributions. People can be using slight of hand, for instance.
+What does this mean? Well imagine a crowd playing Three Card Monte in the streets of New York. The guy running the game runs a demo and shows you all the cards to make you confident. They earn money by making you overconfident and persuading you to bet. Your odds may seem good during the demo round, but that doesn't actually say anything about what will likely happen when the real, high stakes game begins. The person running the game does many simulations, making the "victim" forget that they cannot actually make any conclusions about the odds of winning. There are some variables that we simply do not know even if we put a lot of effort into making posterior probability distributions. People can be using slight of hand, for instance. We must be careful, or else we will be tricked.
 
 ## Temperance
+
+Models are often not as good as they appear. It's important to be patient and understand the pitfalls of the data you have created.
+
+
 
 ## Fortitude
 
