@@ -861,7 +861,8 @@ x %>%
     geom_jitter(alpha = 0.5) +
     labs(title = "Number of White Marbles and Probability of White Marbles",
          x = "Number of White Marbles Out of 3 Samples",
-         y = "Value of p")
+         y = "Number of White Marbles in the Bag") +
+  theme_classic()
 
 ```
 
@@ -873,9 +874,15 @@ knitr::include_graphics("05-probability/images/three_models.png")
 
 ```
 
+```{marginfigure}
+
+The y-axes of both the scatterplot and the 3D visualization are labeled "Number of White Marbles in the Bag." This is a model, a belief about the world you are not sure of. For instance. When the model is 0, we have no white marbles in the bag, meaning that none of the marbles we pull out in the sample will be white.
+
+```
+
 Let's say you got zero white marbles. We would isolate the slice where the result of the simulation involves three black marbles and zero white ones. Here is the unnormalized probability distribution.
 
-```{r}
+```{r, echo=FALSE}
 
 x <- tibble(results = c(rep(0, 1000), rep(0.5, 130), rep(1, 0.1)))
 
@@ -892,7 +899,7 @@ ggplot(x, aes(results)) +
 
 Next, let's normalize the distribution.
 
-```{r}
+```{r, echo=FALSE}
 
 ggplot(x, aes(results)) +
   geom_histogram(aes(y = ..count../sum(..count..)), 
@@ -906,6 +913,7 @@ ggplot(x, aes(results)) +
 
 ```
 
+This plot makes sense because when all three marbles you draw out of the bag are NOT white, there is a pretty good chance that there are no white marbles in the bag. There is a smaller chance that the bag contains one black marble and one white marble. However, there is no chance that the bag only contains white marbles.
 
 <!-- # Section 5: 11 and the 1001 models. Same as coin example with unknown p as used in Albert example. First, p is 0, 0.1, 0.2, ... 0.9, 1.0. Make Bayes Scatterplot. Show marginals. Then, extend it so p takes on 1,001 values. This is how we go from discrete to continuous. All the same tricks apply. -->
 
@@ -987,14 +995,7 @@ knitr::include_graphics("05-probability/images/n_models.png")
 
 ```
 
-<!-- DK: Bunch of things to see in this diagram. -->
-
-<!-- DK: Then, finally, we do the experiment. We get 8 heads. What does that mean?  -->
-
-
-## Posterior distribution
-
-We don't really care about the p($models$, $data$), the joint distribution of the models-which-might-be-true and the data-which-our-experiment-might-generate. Instead, we want to estimate $p$, the unknown parameter which determines the probability that this coin will come up heads when tossed. The joint distribution alone can't tell us that. We *created* the joint distribution before we had even conducted the experiment. It is our creation, a tool which we use to make inferences. Instead, we want the conditional distribution, p($models$ | $data = 8$). We have the results of the experiment. What do those results tell us about the probability distribution of $p$? 
+In both of these idagrams, we see 11 models and 21 outcomes. We don't really care about the p($models$, $data$), the joint distribution of the models-which-might-be-true and the data-which-our-experiment-might-generate. Instead, we want to estimate $p$, the unknown parameter which determines the probability that this coin will come up heads when tossed. The joint distribution alone can't tell us that. We *created* the joint distribution before we had even conducted the experiment. It is our creation, a tool which we use to make inferences. Instead, we want the conditional distribution, p($models$ | $data = 8$). We have the results of the experiment. What do those results tell us about the probability distribution of $p$? 
 
 To answer this question, we simply take a vertical *slice* from the joint distribution at the point of the x-axis corresponding to the results of the experiment.
 
