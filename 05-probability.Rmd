@@ -792,7 +792,7 @@ ggplot(pop, aes(x = as.factor(have_disease), y = as.factor(positive_test))) +
 
 ```
 
-Here is a joint distribution displayed in 3D. Instead of using the "jitter" feature in R to unstack the dots, we are using a 3D Rayshader plot to visualize the number of dots in each box. The number of people who correctly test negative in this city is 98010, far outweighing any of the other categories. There are 990 false positives, 990 true positives, and only 10 false negatives. This is why we can barely see the 3D bar coming from those sections.
+Here is a joint distribution displayed in 3D. Instead of using the "jitter" feature in R to unstack the dots, we are using a 3D plot to visualize the number of dots in each box. The number of people who correctly test negative in this city is 98010, far outweighing any of the other categories. There are 990 false positives, 990 true positives, and only 10 false negatives. This is why we can barely see the 3D bar coming from those sections.
 
 ```{r, echo=FALSE}
 
@@ -809,6 +809,25 @@ This is what looks like when we take the slice where the test result is positive
 ```{r, echo=FALSE}
 
 knitr::include_graphics("05-probability/images/rayshader_disease_zoom.png")
+
+```
+
+We should rotate this slice and look at it from a 2D perspective. This looks very similar to what we saw at the beginning of the chapter when we flipped coins to create a probability distribution.
+
+```{r, echo=FALSE}
+
+mydata <- tibble(results = c(rep(0, 5),
+                             rep(1, 5)))
+
+ggplot(mydata, aes(x = results)) +
+  geom_histogram(aes(y = ..count../sum(..count..)), 
+                 binwidth = 0.5, color = "white") +
+  labs(title = "Conditional Probability Distribution",
+       subtitle = "Probability of Having the Disease Given a Positive Test Result",
+       x = "Disease Status",
+       y = "Probability") +
+  scale_x_continuous(breaks = seq(0,1,1), labels = c("Positive", "Negative")) +
+  theme_classic()
 
 ```
 
@@ -846,11 +865,44 @@ x %>%
 
 ```
 
-Here is the 3D Rayshader visualization:
+Here is the 3D visualization:
 
 ```{r, echo=FALSE}
 
 knitr::include_graphics("05-probability/images/three_models.png")
+
+```
+
+Let's say you got zero white marbles. We would isolate the slice where the result of the simulation involves three black marbles and zero white ones. Here is the unnormalized probability distribution.
+
+```{r}
+
+x <- tibble(results = c(rep(0, 1000), rep(0.5, 130), rep(1, 0.1)))
+
+ggplot(x, aes(results)) +
+  geom_histogram(binwidth = 0.25, color = "white") +
+  labs(title = "Conditional Probability Distribution",
+       subtitle = "Number of White Marbles Given a Three White Marbles Selected in the Sample",
+       x = "Number of White Marbles in the Bag",
+       y = "Count") +
+  scale_x_continuous(breaks = seq(0,1,0.5), labels = c("0", "1", "2")) +
+  theme_classic()
+
+```
+
+Next, let's normalize the distribution.
+
+```{r}
+
+ggplot(x, aes(results)) +
+  geom_histogram(aes(y = ..count../sum(..count..)), 
+                 binwidth = 0.3, color = "white") +
+  labs(title = "Conditional Probability Distribution",
+       subtitle = "Number of White Marbles Given a Three White Marbles Selected in the Sample",
+       x = "Number of White Marbles in the Bag",
+       y = "Count") +
+  scale_x_continuous(breaks = seq(0,1,0.5), labels = c("0", "1", "2")) +
+  theme_classic()
 
 ```
 
