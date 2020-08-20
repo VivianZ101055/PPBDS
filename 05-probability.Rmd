@@ -896,7 +896,7 @@ Next, let's normalize the distribution.
 
 ggplot(x, aes(results)) +
   geom_histogram(aes(y = ..count../sum(..count..)), 
-                 binwidth = 0.3, color = "white") +
+                 binwidth = 0.25, color = "white") +
   labs(title = "Conditional Probability Distribution",
        subtitle = "Number of White Marbles Given a Three White Marbles Selected in the Sample",
        x = "Number of White Marbles in the Bag",
