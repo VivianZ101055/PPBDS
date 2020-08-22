@@ -778,10 +778,12 @@ Here is the joint empirical distribution of the test result and disease status. 
 
 ```{r, echo = FALSE}
 
-pop <- tibble(patient_id = 1:100000, positive_test = c(rep(1, 1980),
+pop <- tibble(patient_id = 1:100000, positive_test = c(rep(1, 990),
+                                                       rep(1, 990),
                                                        rep(0, 98020)),
               have_disease = c(rep(1, 990),
-                               rep(0, 99000),
+                               rep(0, 990),
+                               rep(0, 98010),
                                rep(1, 10)))
 
 ggplot(pop, aes(x = as.factor(have_disease), y = as.factor(positive_test))) +
