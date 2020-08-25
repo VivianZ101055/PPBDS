@@ -5,11 +5,6 @@ output_yaml:
 
 # Probability
 
-<!-- p should be p_h. Use **ggtext** package so that you can have p_h in a axis label.   -->
-
-<!-- STOP WORKING! -->
-
-
 <!-- Parameter means no parathesis. Anytime you talk about a specific p, you must add a subscript, otherwise how do you know what you are talking about. But, at the same time, it is annoying to write long subscripts, like $p_{Bidengets370electorvotes}$, so it is better to just come up with a short subscript, like $p_370$, where the context makes clear what this refers to. -->
 
 <!-- probability distribution means you must have parentheses.  -->
@@ -63,7 +58,6 @@ library(scales)
 library(ggthemes)
 library(Rgraphviz)
 library(tufte)
-library(ggtext)
 library(tidyverse)
 
 # invalidate cache when the tufte version changes
@@ -873,7 +867,7 @@ The y-axes of both the scatterplot and the 3D visualization are labeled "Number 
 
 ```
 
-Let's say you got zero white marbles. We would isolate the slice where the result of the simulation involves three black marbles and zero white ones. Here is the unnormalized probability distribution.
+Let's say you've got zero white marbles. We would isolate the slice where the result of the simulation involves three black marbles and zero white ones. Here is the unnormalized probability distribution.
 
 ```{r, echo=FALSE}
 
@@ -881,7 +875,7 @@ x <- tibble(results = c(rep(0, 1000), rep(0.5, 130), rep(1, 0.1)))
 
 ggplot(x, aes(results)) +
   geom_histogram(binwidth = 0.25, color = "white") +
-  labs(title = "Conditional Probability Distribution",
+  labs(title = "Unnormalized Conditional Probability Distribution",
        subtitle = "Number of White Marbles Given a Three White Marbles Selected in the Sample",
        x = "Number of White Marbles in the Bag",
        y = "Count") +
@@ -921,7 +915,7 @@ This plot makes sense because when all three marbles you draw out of the bag are
 
 ```{marginfigure}
 
-Is it not annoying that we use the same letter, "p", to mean two totally different things? At the start of the chapter, "p" is the symbol used for a probability distribution. Here, we are also using it to mean the probability of a coin coming up heads. Sadly, there are only so many letters we can use, so you need to be mentally flexible enough to keep track of both meanings. When "p" is used for an unknown parameter, it will written in italics as $p$, which is always the case for parameters. The "p" which is the symbol for a probability distribution is in regular text: p. Putting these together, p($p$) is the probability distribution for the probability of a flipped-coin coming up heads.
+Remember the notation we talked about earlier in the chapter. Whenever we are talking about a specific probability (represented by a single value), we will use p with a subscript. However, when we are referring to the entire probability distribution over a set of outcomes, we will use p with parentheses. For example, the probability distribution of a coin toss is p(coin).
 
 ```
 
