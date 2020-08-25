@@ -1243,9 +1243,9 @@ knitr::include_graphics("05-probability/images/coin_flip.jpg")
 
 ```
 
-Model structure is one of the most important ideas under the theme of justice.
+Justice in data science is all about making sure that are models are as "fair" and unbiased as possible. Model structure is one of the most important ideas under the theme of justice.
 
-The first question is whether the models we generate while calculating probabilities are predictive or causal.
+The first question is whether the models we generate while calculating probabilities are predictive or causal. Knowing the difference helps us fairly interpret the data.
 
 Every model is predictive in the sense that, if you give me new data drawn from a stable distribution, I can give you a predictive forecast. But only a subset of those models are causal, meaning that, for a given individual, you can change the value of one input and figure out what the new output would be and then, from that, calculate the causal effect.
 
