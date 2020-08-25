@@ -862,6 +862,12 @@ This example is slightly more complex than the previous one with two models; it 
 
 ```
 
+```{r, echo=FALSE}
+
+knitr::include_graphics("05-probability/images/marble.jpg")
+
+```
+
 Now, imagine that your friend gives you a bag with two marbles. There could either be two white marbles, two black marbles, or one of each color. Thus, the bag could contain 0% white marbles, 50% white marbles, or 100% white marbles. $p$ of white marbles could be 0, 0.5, or 1.
 
 Let's say you take a marble out of the bag, record whether it's black or white, then return it to the bag. You repeat this three times, observing the number of white marbles you see out of three trials. You could get three whites, two whites, one white, or zero whites as a result of this trial. Let's make what we call a Bayes scatterplot out of this. We have three models (three different proportions of white marbles in the bag) and four possible experimental results.
@@ -946,6 +952,12 @@ This plot makes sense because when all three marbles you draw out of the bag are
 ```{marginfigure}
 
 Is it not annoying that we use the same letter, "p", to mean two totally different things? At the start of the chapter, "p" is the symbol used for a probability distribution. Here, we are also using it to mean the probability of a coin coming up heads. Sadly, there are only so many letters we can use, so you need to be mentally flexible enough to keep track of both meanings. When "p" is used for an unknown parameter, it will written in italics as $p$, which is always the case for parameters. The "p" which is the symbol for a probability distribution is in regular text: p. Putting these together, p($p$) is the probability distribution for the probability of a flipped-coin coming up heads.
+
+```
+
+```{r, echo=FALSE}
+
+knitr::include_graphics("05-probability/images/heads.jpg")
 
 ```
 
