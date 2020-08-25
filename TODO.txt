@@ -2,6 +2,7 @@
 
 ## Next Meeting
 
+
 ## TODO
 
 0) How do we find all the broken references? (Bibliography from @kane. Or chapter/figure?)
@@ -315,3 +316,6 @@ https://github.com/allisonhorst/stats-illustrations
 https://bookdown.org/yihui/rmarkdown-cookbook/equatiomatic.html
 
 Consider Netifly: https://cerebralmastication.com/2019/05/11/publishing-bookdown-to-netlify-automagically/
+
+https://kieranhealy.org/categories/visualization/
+
