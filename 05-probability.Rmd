@@ -1256,7 +1256,7 @@ We also discussed the difference between empirical, mathematical, and posterior 
 
 It is useful to understand the three types of distributions and the concept of conditional distributions, but almost every probability distribution is conditional and posterior. We can leave out both words in future discussions, as we generally will in this book. They are implicit.
 
-If you are keen to learn more about probability, here is a video featuring Harvard Professor and Director of the Institute for Quantitative Social Science Gary King. This is a great way to review some of the concepts we covered in this chapter.
+If you are keen to learn more about probability, here is a video featuring Professor Gary King. This is a great way to review some of the concepts we covered in this chapter.
 
 ```{r, echo=FALSE}
 knitr::include_app("https://www.youtube.com/embed/6C7yRBfh2ok")
